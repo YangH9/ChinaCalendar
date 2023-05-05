@@ -25,8 +25,15 @@ const main = `BEGIN:VCALENDAR\r\nPRODID:-//${globalThis.uName}//China Public Hol
 // 写入文件
 fs.writeFileSync(path.join(path.resolve('docs'), 'cal.ics'), main)
 
-// 移动 README.md
-fs.writeFileSync(
-  path.join(path.resolve('docs'), 'README.md'),
-  fs.readFileSync(path.resolve('README.md'))
-)
+// 修改 README.md
+const readmeData = `# ChinaHolidayCalender
+
+中国节假日调休日历
+
+日历订阅：https://yangh9.github.io/ChinaHolidayCalender/cal.ics
+更新时间：${globalThis.nowTime}
+
+[ics文件文档](./docs/)
+[ics文件官方文档](./docs/iCalendar.txt)`
+fs.writeFileSync(path.resolve('README.md'), readmeData)
+fs.writeFileSync(path.join(path.resolve('docs'), 'README.md'), readmeData)
