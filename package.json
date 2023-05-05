@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "push_pages": "git subtree push --prefix github-pages origin github-pages"
   },
   "scripts-info": {
-    "start": "生成cal.ics文件"
+    "start": "生成cal.ics文件",
+    "push_pages": "推送GitHubPages页面"
   },
   "repository": {
     "type": "git",
