@@ -4,5 +4,5 @@
 
 日历订阅：https://yangh9.github.io/ChinaHolidayCalender/cal.ics
 
-[ics文件文档](./doc/)
-[ics文件官方文档](./doc/iCalendar.txt)
+[ics文件文档](./docs/)
+[ics文件官方文档](./docs/iCalendar.txt)

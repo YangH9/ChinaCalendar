@@ -1,17 +1,32 @@
-/**
+const fs = require('fs')
+const path = require('path')
+const { listFormat } = require('./models')
 
-BEGIN:VEVENT
-DTSTART;VALUE=DATE:20221231
-DTEND;VALUE=DATE:20221231
-DTSTAMP:20221231T000001
-UID:20221231T000001_holiday1@yangh9
-CREATED:20221231T000001
-DESCRIPTION:一、元旦：2022年12月31日至2023年1月2日放假调休，共3天。\n\n放假通知: http://www.gov.cn/zhengce/content/2022-12/08/content_5730844.htm
-LAST-MODIFIED:20221209T130003
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:元旦 假期 第1天/共3天
-TRANSP:TRANSPARENT
-END:VEVENT
+globalThis.uName = 'yangh9'
+globalThis.nowTime = new Date().toFormat('yyyy-MM-dd hh:mm:ss')
+globalThis.modified = new Date(globalThis.nowTime).toFormat()
+globalThis.calName = '中国节假日日历'
+globalThis.calDesc = `2020~2023年中国放假、调休和补班日历 更新时间 ${globalThis.nowTime}`
 
-*/
+var filePath = path.resolve('data')
+
+const body = fs
+  .readdirSync(filePath)
+  ?.map((fileName) => {
+    const fileDir = path.join(filePath, fileName)
+    const model = require(fileDir)
+    return listFormat(model.list, model.govUrl)
+  })
+  .reverse()
+  .join('')
+
+const main = `BEGIN:VCALENDAR\r\nPRODID:-//${globalThis.uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${globalThis.calName}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${globalThis.calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${body}END:VCALENDAR`
+
+// 写入文件
+fs.writeFileSync(path.join(path.resolve('docs'), 'cal.ics'), main)
+
+// 移动 README.md
+fs.writeFileSync(
+  path.join(path.resolve('docs'), 'README.md'),
+  fs.readFileSync(path.resolve('README.md'))
+)
