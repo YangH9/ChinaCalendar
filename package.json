@@ -1,0 +1,30 @@
+{
+  "name": "chinaholidaycalender",
+  "description": "中国节假日调休日历",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "scripts-info": {
+    "start": "生成cal.ics文件"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com"
+  },
+  "keywords": [
+    "中国节假日",
+    "法定节假日",
+    "日历"
+  ],
+  "author": "yangh9",
+  "license": "MIT",
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  },
+  "directories": {
+    "doc": "doc"
+  }
+}
