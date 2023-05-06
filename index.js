@@ -3,9 +3,10 @@ const path = require('path')
 const { listFormat } = require('./models')
 
 globalThis.uName = 'yangh9'
-globalThis.nowTime = new Date().toFormat('yyyy-MM-dd hh:mm:ss')
-globalThis.modified = new Date(globalThis.nowTime).toFormat()
-globalThis.calName = '中国节假日日历'
+globalThis.nowDate = new Date()
+globalThis.nowTime = globalThis.nowDate.toFormat('yyyy-MM-dd hh:mm:ss')
+globalThis.modified = globalThis.nowDate.toFormat()
+globalThis.calName = '中国节日、节假日日历'
 globalThis.calDesc = `2020~2023年中国放假、调休和补班日历 更新时间 ${globalThis.nowTime}`
 
 var filePath = path.resolve('data')
@@ -13,9 +14,13 @@ var filePath = path.resolve('data')
 const body = fs
   .readdirSync(filePath)
   ?.map((fileName) => {
-    const fileDir = path.join(filePath, fileName)
-    const model = require(fileDir)
-    return listFormat(model.list, model.govUrl)
+    if (/.js$/i.test(fileName)) {
+      const fileDir = path.join(filePath, fileName)
+      const model = require(fileDir)
+      return listFormat(model.list, model.govUrl)
+    } else {
+      return ''
+    }
   })
   .reverse()
   .join('')
@@ -30,10 +35,26 @@ const readmeData = `# ChinaHolidayCalender
 
 中国节假日调休日历
 
-日历订阅：https://yangh9.github.io/ChinaHolidayCalender/cal.ics
+日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal.ics](https://yangh9.github.io/ChinaHolidayCalender/cal.ics)
+
 更新时间：${globalThis.nowTime}
 
-[ics文件文档](./docs/)
-[ics文件官方文档](./docs/iCalendar.txt)`
-fs.writeFileSync(path.resolve('README.md'), readmeData)
+### 订阅方式
+
+#### 苹果订阅
+
+> 设置 => 日历 => 账户 => 添加账户 => 其他 => 添加已订阅的日历 => 粘贴链接
+
+#### 安卓订阅
+
+##### 小米订阅
+
+> 日历 => 设置 => 日程导入 => URL导入 => 粘贴链接
+
+> 其他机型订阅方式持续补充中……
+
+[ics文件文档](./iCalendar.md)
+
+[ics文件官方文档](./iCalendar.txt)`
+
 fs.writeFileSync(path.join(path.resolve('docs'), 'README.md'), readmeData)
