@@ -29,32 +29,3 @@ const main = `BEGIN:VCALENDAR\r\nPRODID:-//${globalThis.uName}//China Public Hol
 
 // 写入文件
 fs.writeFileSync(path.join(path.resolve('docs'), 'cal.ics'), main)
-
-// 修改 README.md
-const readmeData = `# ChinaHolidayCalender
-
-中国节假日调休日历
-
-日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal.ics](https://yangh9.github.io/ChinaHolidayCalender/cal.ics)
-
-更新时间：${globalThis.nowTime}
-
-### 订阅方式
-
-#### 苹果订阅
-
-> 设置 => 日历 => 账户 => 添加账户 => 其他 => 添加已订阅的日历 => 粘贴链接
-
-#### 安卓订阅
-
-##### 小米订阅
-
-> 日历 => 设置 => 日程导入 => URL导入 => 粘贴链接
-
-> 其他机型订阅方式持续补充中……
-
-[ics文件文档](./iCalendar.md)
-
-[ics文件官方文档](./iCalendar.txt)`
-
-fs.writeFileSync(path.join(path.resolve('docs'), 'README.md'), readmeData)
