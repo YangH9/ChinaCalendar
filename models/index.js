@@ -30,7 +30,7 @@ if (!Date.prototype.toFormat) {
 
 exports.listFormat = (list, govUrl) => {
   const arr = []
-  list.map((item) => {
+  list?.map((item) => {
     let hnum = 0
     let cnum = 0
     let hsnum = item.timeList.filter((i) => i.type === 'holiday').length
@@ -46,24 +46,24 @@ exports.listFormat = (list, govUrl) => {
             'yyyyMMdd'
           )}\r\nDTSTAMP:${time}\r\nUID:${time}_${i.type}@${
             globalThis.uName
-          }\r\nCREATED:${time}\r\nSUMMARY:${item.summary} ${
+          }\r\nCREATED:${time}\r\nSUMMARY:「${item.summary} ${
             i.name
-          } 第${hnum}天/共${hsnum}天\r\nDESCRIPTION:${
+          }」 第${hnum}天/共${hsnum}天\r\nDESCRIPTION:${
             item.description
           }\\n\\n放假通知：${govUrl}\r\nLAST-MODIFIED:${
             globalThis.modified
           }\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:0\r\nEND:VEVENT\r\n`
         )
-      } else {
+      } else if (i.type === 'compensateday') {
         cnum++
         arr.push(
           `BEGIN:VEVENT\r\nDTSTART:${new Date(`${i.time} 09:00`).toFormat()}\r\nDTEND:${new Date(
             `${i.time} 18:00`
           ).toFormat()}\r\nDTSTAMP:${time}\r\nUID:${time}_${i.type}@${
             globalThis.uName
-          }\r\nCREATED:${time}\r\nSUMMARY:${item.summary} ${
+          }\r\nCREATED:${time}\r\nSUMMARY:「${item.summary} ${
             i.name
-          } 第${cnum}天/共${csnum}天\r\nDESCRIPTION:${
+          }」 第${cnum}天/共${csnum}天\r\nDESCRIPTION:${
             item.description
           }\\n\\n放假通知：${govUrl}\r\nLAST-MODIFIED:${
             globalThis.modified
