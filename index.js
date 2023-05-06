@@ -3,8 +3,9 @@ const path = require('path')
 const { listFormat } = require('./models')
 
 globalThis.uName = 'yangh9'
-globalThis.nowTime = new Date().toFormat('yyyy-MM-dd hh:mm:ss')
-globalThis.modified = new Date(globalThis.nowTime).toFormat()
+globalThis.nowDate = new Date()
+globalThis.nowTime = globalThis.nowDate.toFormat('yyyy-MM-dd hh:mm:ss')
+globalThis.modified = globalThis.nowDate.toFormat()
 globalThis.calName = '中国节日、节假日日历'
 globalThis.calDesc = `2020~2023年中国放假、调休和补班日历 更新时间 ${globalThis.nowTime}`
 
@@ -13,9 +14,13 @@ var filePath = path.resolve('data')
 const body = fs
   .readdirSync(filePath)
   ?.map((fileName) => {
-    const fileDir = path.join(filePath, fileName)
-    const model = require(fileDir)
-    return listFormat(model.list, model.govUrl)
+    if (/.js$/i.test(fileName)) {
+      const fileDir = path.join(filePath, fileName)
+      const model = require(fileDir)
+      return listFormat(model.list, model.govUrl)
+    } else {
+      return ''
+    }
   })
   .reverse()
   .join('')
