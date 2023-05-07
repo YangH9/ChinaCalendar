@@ -108,6 +108,51 @@ module.exports = {
           type: 'festival'
         }
       ]
+    },
+    {
+      title:'民间节日',
+      timeList:[],
+    },
+    {
+      title: '纪念日、公祭日、活动日',
+      timeList: [
+        {
+          time: `${getYear(2)}/2/7`,
+          summary: '二七纪念日',
+          description: '二七纪念日（2月7日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(4)}/4/4`,
+          summary: '全国性哀悼日',
+          description: '全国性哀悼日（4月4日[2020年起]），全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(4)}/4/15`,
+          summary: '全民国家安全教育日',
+          description: '全民国家安全教育日（4月15日[2015年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(4)}/4/24`,
+          summary: '中国航天日',
+          description: '中国航天日（4月24日[2016年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(5)}/5/10`,
+          summary: '中国品牌日',
+          description: '中国品牌日（5月10日[2017年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(5)}/5/12`,
+          summary: '全国防灾减灾日',
+          description: '全国防灾减灾日（5月12日[2009年起]）',
+          type: 'festival'
+        },
+      ]
     }
   ]
 }
