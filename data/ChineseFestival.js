@@ -110,8 +110,74 @@ module.exports = {
       ]
     },
     {
-      title:'民间节日',
-      timeList:[],
+      title: '现代流行节日',
+      timeList: [
+        {
+          time: ``,
+          summary: '情人节',
+          description: '2月14日情人节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '母亲节',
+          description: '5月的第二个星期日母亲节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '父亲节',
+          description: '6月的第三个星期日父亲节',
+          type: 'festival'
+        },
+      ]
+    },
+    {
+      title: '民间传统节日',
+      timeList: [
+        {
+          time: ``,
+          summary: '元宵节',
+          description: '农历正月十五元宵节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '龙抬头、社日节、花朝节',
+          description: '农历二月初二龙抬头、社日节、花朝节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '七夕节',
+          description: '农历七月初七七夕节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '重阳节',
+          description: '农历九月初九重阳节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '腊八节',
+          description: '农历十二月初八腊八节',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '小年',
+          description: '农历十二月二十四前后小年',
+          type: 'festival'
+        },
+        {
+          time: ``,
+          summary: '除夕',
+          description: '农历年最后一天除夕',
+          type: 'festival'
+        },
+      ]
     },
     {
       title: '纪念日、公祭日、活动日',
@@ -125,7 +191,8 @@ module.exports = {
         {
           time: `${getYear(4)}/4/4`,
           summary: '全国性哀悼日',
-          description: '全国性哀悼日（4月4日[2020年起]），全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼',
+          description:
+            '全国性哀悼日（4月4日[2020年起]），全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼',
           type: 'festival'
         },
         {
@@ -152,6 +219,126 @@ module.exports = {
           description: '全国防灾减灾日（5月12日[2009年起]）',
           type: 'festival'
         },
+        {
+          time: `${getYear(5)}/5/19`,
+          summary: '中国旅游日',
+          description: '中国旅游日（5月19日[2011年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(5)}/5/21`,
+          summary: '全国助残日',
+          description: '全国助残日（5月的第三个星期日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(5)}/5/30`,
+          summary: '五卅纪念日',
+          description: '五卅纪念日（5月30日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(6)}/6/5`,
+          summary: '环境日',
+          description: '环境日（6月5日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(6)}/6/10`,
+          summary: '文化和自然遗产日',
+          description: '文化和自然遗产日（6月的第二个星期六[2017年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(6)}/6/25`,
+          summary: '全国土地日',
+          description: '全国土地日（6月25日[1991年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(7)}/7/7`,
+          summary: '七七抗战纪念日',
+          description: '七七抗战纪念日（7月7日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(7)}/7/11`,
+          summary: '中国航海日',
+          description: '中国航海日（7月11日[2005年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(8)}/8/8`,
+          summary: '全民健身日',
+          description: '全民健身日（8月8日[2009年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(8)}/8/25`,
+          summary: '残疾预防日',
+          description: '残疾预防日（8月25日[2017年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(9)}/9/3`,
+          summary: '中国人民抗日战争胜利纪念日',
+          description: '中国人民抗日战争胜利纪念日（9月3日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(9)}/9/5`,
+          summary: '中华慈善日',
+          description: '中华慈善日（9月5日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(9)}/9/18`,
+          summary: '九一八纪念日',
+          description: '九一八纪念日（9月18日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(9)}/9/16`,
+          summary: '全民国防教育日',
+          description: '全民国防教育日（9月的第三个星期六）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(9)}/9/30`,
+          summary: '烈士纪念日',
+          description: '烈士纪念日（9月30日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(10)}/10/17`,
+          summary: '国家扶贫日',
+          description: '国家扶贫日（10月17日[2014年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(12)}/12/2`,
+          summary: '全国交通安全日',
+          description: '全国交通安全日（12月12日[2012年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(12)}/12/4`,
+          summary: '国家宪法日',
+          description: '国家宪法日（12月4日）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(12)}/12/4`,
+          summary: '全国法制宣传日',
+          description: '全国法制宣传日（12月4日[2001年起]）',
+          type: 'festival'
+        },
+        {
+          time: `${getYear(12)}/12/13`,
+          summary: '南京大屠杀死难者国家公祭日',
+          description: '南京大屠杀死难者国家公祭日（12月13日）',
+          type: 'festival'
+        }
       ]
     }
   ]
