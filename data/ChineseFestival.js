@@ -1,35 +1,324 @@
-// 当前年份
-// 农历时间计算当前月份，修改到下一年
+/**
+ * @description: 计算日期年份，自动后延
+ * @param {Number} month 月份
+ * @returns {Number} year 年份
+ */
 const getYear = (month) =>
-  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() + 1 > +month)
-
-// 法定节日、公祭日、活动日
-
-// 2020年4月4
-
-// 二七纪念日、五卅纪念日、七七抗战纪念日、九三抗战胜利纪念日、九一八纪念日、教师节、护士节、记者节、植树节等其他节日、纪念日
-
-// 中国人民丰收节、老年节
+  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() + 1 > +month) + 1
 
 /**
- * 民间节日
-农历正月初七人日、农历正月十五元宵节
-农历二月初二龙抬头、社日节、花朝节
-农历三月初三上巳节
-清明节前1、2日寒食节
-农历七月初七七夕节 农历七月十五中元节
-农历九月初九重阳节
-农历十月初一寒衣节 十月十五下元节
-12月21-23日交节冬至节
-农历十二月初八腊八节 农历十二月二十四前后小年 农历年最后一天除夕等
+ * @description: 获取几月的第几个星期几
+ * @param {Number} week 周几
+ * @param {Number} num 第几个
+ * @param {Number} month 月份
+ * @param {Number} year 年份（可不传，自动计算
+ * @returns {String} 时间 year/month/date
  */
+const getWeekDay = (week, num, month, year = getYear(month)) => {
+  const firstWeek = new Date(year, month - 1, 1).getDay()
+  const date = week - firstWeek + num * 7 + 1
+  return `${year}/${month}/${date}`
+}
 
 /**
- * 现代流行节日
-2月14日情人节
-5月的第二个星期日母亲节
-6月的第三个星期日父亲节等
+ * @description: 转换农历时间
+ * @param {Number} month 月份
+ * @param {Number} date 日期
+ * @returns {String} 时间 year/month/date
  */
+const getLunar2Solar = (month, date) => {
+  var lunarInfo = [
+    0x04bd8,
+    0x04ae0,
+    0x0a570,
+    0x054d5,
+    0x0d260,
+    0x0d950,
+    0x16554,
+    0x056a0,
+    0x09ad0,
+    0x055d2, // 1900-1909
+
+    0x04ae0,
+    0x0a5b6,
+    0x0a4d0,
+    0x0d250,
+    0x1d255,
+    0x0b540,
+    0x0d6a0,
+    0x0ada2,
+    0x095b0,
+    0x14977, // 1910-1919
+
+    0x04970,
+    0x0a4b0,
+    0x0b4b5,
+    0x06a50,
+    0x06d40,
+    0x1ab54,
+    0x02b60,
+    0x09570,
+    0x052f2,
+    0x04970, // 1920-1929
+
+    0x06566,
+    0x0d4a0,
+    0x0ea50,
+    0x06e95,
+    0x05ad0,
+    0x02b60,
+    0x186e3,
+    0x092e0,
+    0x1c8d7,
+    0x0c950, // 1930-1939
+
+    0x0d4a0,
+    0x1d8a6,
+    0x0b550,
+    0x056a0,
+    0x1a5b4,
+    0x025d0,
+    0x092d0,
+    0x0d2b2,
+    0x0a950,
+    0x0b557, // 1940-1949
+
+    0x06ca0,
+    0x0b550,
+    0x15355,
+    0x04da0,
+    0x0a5b0,
+    0x14573,
+    0x052b0,
+    0x0a9a8,
+    0x0e950,
+    0x06aa0, // 1950-1959
+
+    0x0aea6,
+    0x0ab50,
+    0x04b60,
+    0x0aae4,
+    0x0a570,
+    0x05260,
+    0x0f263,
+    0x0d950,
+    0x05b57,
+    0x056a0, // 1960-1969
+
+    0x096d0,
+    0x04dd5,
+    0x04ad0,
+    0x0a4d0,
+    0x0d4d4,
+    0x0d250,
+    0x0d558,
+    0x0b540,
+    0x0b6a0,
+    0x195a6, // 1970-1979
+
+    0x095b0,
+    0x049b0,
+    0x0a974,
+    0x0a4b0,
+    0x0b27a,
+    0x06a50,
+    0x06d40,
+    0x0af46,
+    0x0ab60,
+    0x09570, // 1980-1989
+
+    0x04af5,
+    0x04970,
+    0x064b0,
+    0x074a3,
+    0x0ea50,
+    0x06b58,
+    0x05ac0,
+    0x0ab60,
+    0x096d5,
+    0x092e0, // 1990-1999
+
+    0x0c960,
+    0x0d954,
+    0x0d4a0,
+    0x0da50,
+    0x07552,
+    0x056a0,
+    0x0abb7,
+    0x025d0,
+    0x092d0,
+    0x0cab5, // 2000-2009
+
+    0x0a950,
+    0x0b4a0,
+    0x0baa4,
+    0x0ad50,
+    0x055d9,
+    0x04ba0,
+    0x0a5b0,
+    0x15176,
+    0x052b0,
+    0x0a930, // 2010-2019
+
+    0x07954,
+    0x06aa0,
+    0x0ad50,
+    0x05b52,
+    0x04b60,
+    0x0a6e6,
+    0x0a4e0,
+    0x0d260,
+    0x0ea65,
+    0x0d530, // 2020-2029
+
+    0x05aa0,
+    0x076a3,
+    0x096d0,
+    0x04afb,
+    0x04ad0,
+    0x0a4d0,
+    0x1d0b6,
+    0x0d250,
+    0x0d520,
+    0x0dd45, // 2030-2039
+
+    0x0b5a0,
+    0x056d0,
+    0x055b2,
+    0x049b0,
+    0x0a577,
+    0x0a4b0,
+    0x0aa50,
+    0x1b255,
+    0x06d20,
+    0x0ada0, // 2040-2049
+
+    0x14b63,
+    0x09370,
+    0x049f8,
+    0x04970,
+    0x064b0,
+    0x168a6,
+    0x0ea50,
+    0x06b20,
+    0x1a6c4,
+    0x0aae0, // 2050-2059
+
+    0x0a2e0,
+    0x0d2e3,
+    0x0c960,
+    0x0d557,
+    0x0d4a0,
+    0x0da50,
+    0x05d55,
+    0x056a0,
+    0x0a6d0,
+    0x055d4, // 2060-2069
+
+    0x052d0,
+    0x0a9b8,
+    0x0a950,
+    0x0b4a0,
+    0x0b6a6,
+    0x0ad50,
+    0x055a0,
+    0x0aba4,
+    0x0a5b0,
+    0x052b0, // 2070-2079
+
+    0x0b273,
+    0x06930,
+    0x07337,
+    0x06aa0,
+    0x0ad50,
+    0x14b55,
+    0x04b60,
+    0x0a570,
+    0x054e4,
+    0x0d160, // 2080-2089
+
+    0x0e968,
+    0x0d520,
+    0x0daa0,
+    0x16aa6,
+    0x056d0,
+    0x04ae0,
+    0x0a9d4,
+    0x0a2d0,
+    0x0d150,
+    0x0f252, // 2090-2099
+
+    0x0d520
+  ] // 2100
+  const lYearDays = (y) => {
+    var i
+    var sum = 348
+    for (i = 0x8000; i > 0x8; i >>= 1) {
+      sum += lunarInfo[y - 1900] & i ? 1 : 0
+    }
+    return sum + leapDays(y)
+  }
+  const leapMonth = (y) => {
+    return lunarInfo[y - 1900] & 0xf
+  }
+  const leapDays = (y) => {
+    if (leapMonth(y)) {
+      return lunarInfo[y - 1900] & 0x10000 ? 30 : 29
+    }
+    return 0
+  }
+  const monthDays = (y, m) => {
+    if (m > 12 || m < 1) {
+      return -1
+    }
+    return lunarInfo[y - 1900] & (0x10000 >> m) ? 30 : 29
+  }
+  const lunar2solar = (y, m, d, isLeapMonth) => {
+    // 参数区间1900.1.31~2100.12.1
+    isLeapMonth = !!isLeapMonth
+    if (isLeapMonth && leapMonth !== m) {
+      return -1
+    }
+    if ((y === 2100 && m === 12 && d > 1) || (y === 1900 && m === 1 && d < 31)) {
+      return -1
+    }
+    var day = monthDays(y, m)
+    var _day = day
+    if (isLeapMonth) {
+      _day = leapDays(y, m)
+    }
+    if (y < 1900 || y > 2100 || d > _day) {
+      return -1
+    }
+    var offset = 0
+    for (var i = 1900; i < y; i++) {
+      offset += lYearDays(i)
+    }
+    var leap = 0
+    var isAdd = false
+    for (i = 1; i < m; i++) {
+      leap = leapMonth(y)
+      if (!isAdd) {
+        if (leap <= i && leap > 0) {
+          offset += leapDays(y)
+          isAdd = true
+        }
+      }
+      offset += monthDays(y, i)
+    }
+    if (isLeapMonth) {
+      offset += day
+    }
+    var stmap = Date.UTC(1900, 1, 30, 0, 0, 0)
+    var calObj = new Date((offset + d - 31) * 86400000 + stmap)
+    var cY = calObj.getUTCFullYear()
+    var cM = calObj.getUTCMonth() + 1
+    var cD = calObj.getUTCDate()
+    return { year: cY, month: cM, day: cD }
+  }
+  const cal = lunar2solar(getYear(month), month, date)
+  return `${cal.year}/${cal.month}/${cal.day}`
+}
 
 module.exports = {
   list: [
@@ -113,70 +402,80 @@ module.exports = {
       title: '现代流行节日',
       timeList: [
         {
-          time: ``,
+          time: `${getYear(2)}/2/14`,
           summary: '情人节',
-          description: '2月14日情人节',
+          description: '情人节（2月14日）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getWeekDay(0, 2, 5)}`,
           summary: '母亲节',
-          description: '5月的第二个星期日母亲节',
+          description: '母亲节（5月的第二个星期日）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getWeekDay(0, 3, 6)}`,
           summary: '父亲节',
-          description: '6月的第三个星期日父亲节',
+          description: '父亲节（6月的第三个星期日）',
           type: 'festival'
-        },
+        }
       ]
     },
     {
       title: '民间传统节日',
       timeList: [
         {
-          time: ``,
+          time: `${getLunar2Solar(1, 15)}`,
           summary: '元宵节',
-          description: '农历正月十五元宵节',
+          description: '元宵节（农历正月十五）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getLunar2Solar(2, 2)}`,
           summary: '龙抬头、社日节、花朝节',
-          description: '农历二月初二龙抬头、社日节、花朝节',
+          description: '龙抬头、社日节、花朝节（农历二月初二）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getLunar2Solar(7, 7)}`,
           summary: '七夕节',
-          description: '农历七月初七七夕节',
+          description: '七夕节（农历七月初七）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getLunar2Solar(9, 9)}`,
           summary: '重阳节',
-          description: '农历九月初九重阳节',
+          description: '重阳节（农历九月初九）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getLunar2Solar(12, 8)}`,
           summary: '腊八节',
-          description: '农历十二月初八腊八节',
+          description: '腊八节（农历十二月初八）',
           type: 'festival'
         },
         {
-          time: ``,
-          summary: '小年',
-          description: '农历十二月二十四前后小年',
+          time: `${getLunar2Solar(12, 23)}`,
+          summary: '北小年',
+          description: '北方小年（农历十二月二十三）',
           type: 'festival'
         },
         {
-          time: ``,
+          time: `${getLunar2Solar(12, 24)}`,
+          summary: '南小年',
+          description: '南方小年（农历十二月二十四）',
+          type: 'festival'
+        },
+        {
+          time: `${
+            getLunar2Solar(12, 30) === 'undefined/undefined/undefined'
+              ? getLunar2Solar(12, 29)
+              : getLunar2Solar(12, 30)
+          }`,
           summary: '除夕',
-          description: '农历年最后一天除夕',
+          description: '除夕（农历年最后一天）',
           type: 'festival'
-        },
+        }
       ]
     },
     {
@@ -226,7 +525,7 @@ module.exports = {
           type: 'festival'
         },
         {
-          time: `${getYear(5)}/5/21`,
+          time: `${getWeekDay(0, 3, 5)}`,
           summary: '全国助残日',
           description: '全国助残日（5月的第三个星期日）',
           type: 'festival'
@@ -244,7 +543,7 @@ module.exports = {
           type: 'festival'
         },
         {
-          time: `${getYear(6)}/6/10`,
+          time: `${getWeekDay(6, 2, 6)}`,
           summary: '文化和自然遗产日',
           description: '文化和自然遗产日（6月的第二个星期六[2017年起]）',
           type: 'festival'
@@ -298,7 +597,7 @@ module.exports = {
           type: 'festival'
         },
         {
-          time: `${getYear(9)}/9/16`,
+          time: `${getWeekDay(6, 3, 9)}`,
           summary: '全民国防教育日',
           description: '全民国防教育日（9月的第三个星期六）',
           type: 'festival'
