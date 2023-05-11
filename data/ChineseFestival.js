@@ -320,6 +320,12 @@ const getLunar2Solar = (month, date) => {
   return `${cal.year}/${cal.month}/${cal.day}`
 }
 
+// 清明节日期
+const getQingMing = (year) => {
+  const leapYear = (year) => (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+  return leapYear(year) || leapYear(year - 1) ? '4' : '5'
+}
+
 module.exports = {
   list: [
     {
@@ -338,7 +344,7 @@ module.exports = {
           type: 'CitizenHoliday'
         },
         {
-          time: `${getYear(4)}/4/4`,
+          time: `${getYear(4)}/4/${getQingMing(getYear(4))}`,
           summary: '清明节',
           description: '清明节（4月4~6日）24节气',
           type: 'CitizenHoliday'
