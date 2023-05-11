@@ -323,6 +323,53 @@ const getLunar2Solar = (month, date) => {
 module.exports = {
   list: [
     {
+      title: '全体公民放假的节日',
+      timeList: [
+        {
+          time: `${getYear(1)}/1/1`,
+          summary: '元旦',
+          description: '元旦（1月1日）。',
+          type: 'CitizenHoliday'
+        },
+        {
+          time: `${getLunar2Solar(1, 1)}`,
+          summary: '春节',
+          description: '春节（农历正月初一）。',
+          type: 'CitizenHoliday'
+        },
+        {
+          time: `${getYear(4)}/4/4`,
+          summary: '清明节',
+          description: '清明节（4月4~6日）24节气',
+          type: 'CitizenHoliday'
+        },
+        {
+          time: `${getYear(5)}/5/1`,
+          summary: '劳动节',
+          description: '劳动节（5月1日）',
+          type: 'CitizenHoliday'
+        },
+        {
+          time: `${getLunar2Solar(5, 5)}`,
+          summary: '端午节',
+          description: '端午节（农历五月初五）',
+          type: 'CitizenHoliday'
+        },
+        {
+          time: `${getLunar2Solar(8, 15)}`,
+          summary: '中秋节',
+          description: '中秋节（农历八月十五）',
+          type: 'CitizenHoliday'
+        },
+        {
+          time: `${getYear(10)}/10/1`,
+          summary: '国庆节',
+          description: '国庆节（10月1日）',
+          type: 'CitizenHoliday'
+        }
+      ]
+    },
+    {
       title: '部分公民放假的节日及纪念日',
       timeList: [
         {
