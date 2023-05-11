@@ -4,7 +4,7 @@
  * @returns {Number} year 年份
  */
 const getYear = (month) =>
-  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() + 1 > +month) + 1
+  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() + 1 > +month)
 
 /**
  * @description: 获取几月的第几个星期几
