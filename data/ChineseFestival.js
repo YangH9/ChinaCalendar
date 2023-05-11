@@ -326,6 +326,13 @@ const getQingMing = (year) => {
   return leapYear(year) || leapYear(year - 1) ? '4' : '5'
 }
 
+// 除夕日期
+const getChuXi = () => {
+  getLunar2Solar(12, 30) === 'undefined/undefined/undefined'
+    ? getLunar2Solar(12, 29)
+    : getLunar2Solar(12, 30)
+}
+
 module.exports = {
   list: [
     {
@@ -520,11 +527,7 @@ module.exports = {
           type: 'festival'
         },
         {
-          time: `${
-            getLunar2Solar(12, 30) === 'undefined/undefined/undefined'
-              ? getLunar2Solar(12, 29)
-              : getLunar2Solar(12, 30)
-          }`,
+          time: `${getChuXi()}`,
           summary: '除夕',
           description: '除夕（农历年最后一天）',
           type: 'festival'
