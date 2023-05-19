@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { listFormat } = require('./models')
 
+globalThis.key_id = 1
 globalThis.uName = 'yangh9'
 globalThis.nowDate = new Date()
 globalThis.nowTime = globalThis.nowDate.toFormat('yyyy-MM-dd hh:mm:ss')
