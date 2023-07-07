@@ -4,7 +4,7 @@
 
 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal.ics](https://yangh9.github.io/ChinaHolidayCalender/cal.ics)
 
-更新时间：2023-06-09 11:50:11
+更新时间：2023-07-07 15:50:36
 
 ### 订阅方式
 
