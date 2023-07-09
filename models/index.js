@@ -1,9 +1,9 @@
 if (!Date.prototype.toFormat) {
   ;(function () {
-    Date.prototype.toFormat = function (pattern = 'yyyyMMddThhmmss') {
+    Date.prototype.toFormat = function (pattern = 'YYYYMMDDThhmmss') {
       const time = {
         'M+': this.getMonth() + 1,
-        'd+': this.getDate(),
+        'D+': this.getDate(),
         'h+': this.getHours(),
         'm+': this.getMinutes(),
         's+': this.getSeconds(),
@@ -11,7 +11,7 @@ if (!Date.prototype.toFormat) {
         S: this.getMilliseconds()
       }
       const week = ['\u65e5', '\u4e00', '\u4e8c', '\u4e09', '\u56db', '\u4e94', '\u516d']
-      if (/(y+)/.test(pattern)) {
+      if (/(Y+)/.test(pattern)) {
         pattern = pattern.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
       }
       if (/(E+)/.test(pattern)) {
@@ -44,7 +44,7 @@ exports.listFormat = (list, govUrl) => {
     let hsnum = item.timeList.filter((i) => i.type === 'holiday').length
     let csnum = item.timeList.filter((i) => i.type === 'compensateday').length
     item.timeList.map((i) => {
-      let timeDate = `VALUE=DATE:${new Date(i.time).toFormat('yyyyMMdd')}`
+      let timeDate = `VALUE=DATE:${new Date(i.time).toFormat('YYYYMMDD')}`
       let timeT = new Date(`${i.time} 00:00:01`).toFormat()
       let UID = `${timeT}_${i.type}${globalThis.key_id++}@${globalThis.uName}`
       let time09 = new Date(`${i.time} 09:00`).toFormat()
