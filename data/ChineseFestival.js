@@ -480,7 +480,7 @@ module.exports = {
         {
           time: `${getYear(8)}/8/15`,
           summary: `日本宣布无条件投降${getYear(8) - 1945}年`,
-          description: '1945年8月15日，日本宣布无条件投降！',
+          description: '1945年8月15日，日本宣布无条件投降！勿忘国耻，吾辈自强！',
           type: 'festival'
         },
         {
