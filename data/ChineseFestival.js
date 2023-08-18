@@ -4,7 +4,7 @@
  * @returns {Number} year 年份
  */
 const getYear = (month) =>
-  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() + 1 > +month)
+  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() - 1 > +month)
 
 /**
  * @description: 获取几月的第几个星期几
@@ -123,11 +123,10 @@ const getQiuFen = (year) => {
 }
 
 // 除夕日期
-const getChuXi = () => {
+const getChuXi = () =>
   getLunar2Solar(12, 30) === 'undefined/undefined/undefined'
     ? getLunar2Solar(12, 29)
     : getLunar2Solar(12, 30)
-}
 
 module.exports = {
   list: [
