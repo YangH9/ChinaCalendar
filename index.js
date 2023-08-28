@@ -1,20 +1,36 @@
 const fs = require('fs')
 const path = require('path')
 const { listFormat } = require('./models')
+const { writeReadme } = require('./models/writeFile')
 
-globalThis.key_id = 1
 globalThis.uName = 'yangh9'
 globalThis.nowDate = new Date()
 globalThis.nowTime = globalThis.nowDate.toFormat('YYYY-MM-DD hh:mm:ss')
 globalThis.modified = globalThis.nowDate.toFormat()
 globalThis.calName = '中国节日、纪念日、假日日历'
-globalThis.calDesc = `2020~2023年中国人民共和国节日、纪念日和假日调休、补班日历 更新时间 ${globalThis.nowTime}`
+// globalThis.calDesc = `2020~2023年中国人民共和国节日、纪念日和假日调休、补班日历。更新时间:${globalThis.nowTime}`
+globalThis.yearList = []
 
-var filePath = path.resolve('data')
+const filePath = path.resolve('data')
+
+// 读取生成部分数据
+let desc = `年中国人民共和国节日、纪念日和假日调休、补班日历。更新时间：`
+let min = 0
+let max = 0
+fs.readdirSync(filePath).map((fileName) => {
+  let num = parseInt(fileName)
+  if (!isNaN(num)) {
+    min = !min ? num : min < num ? min : num
+    max = !max ? num : max > num ? max : num
+    globalThis.yearList.push(num)
+  }
+})
+globalThis.calDesc = `${min}~${max}${desc}${globalThis.nowTime}`
+globalThis.yearList.push(globalThis.yearList.at(-1) + 1)
 
 const body = fs
   .readdirSync(filePath)
-  ?.map((fileName) => {
+  .map((fileName) => {
     if (/.js$/i.test(fileName)) {
       const fileDir = path.join(filePath, fileName)
       const model = require(fileDir)
@@ -30,3 +46,5 @@ const main = `BEGIN:VCALENDAR\r\nPRODID:-//${globalThis.uName}//China Public Hol
 
 // 写入文件
 fs.writeFileSync(path.join(path.resolve('docs'), 'cal.ics'), main)
+
+writeReadme()

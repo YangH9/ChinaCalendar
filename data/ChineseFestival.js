@@ -1,10 +1,10 @@
 /**
- * @description: 计算日期年份，自动后延
+ * @description: 计算日期年份，自动后延，当前月份前推三月
  * @param {Number} month 月份
  * @returns {Number} year 年份
  */
 const getYear = (month) =>
-  globalThis.nowDate.getFullYear() + +(globalThis.nowDate.getMonth() - 1 > +month)
+  globalThis.nowDate.getFullYear() + +((globalThis.nowDate.getMonth() + 1 - 3 + 12) % 12 > +month)
 
 /**
  * @description: 获取几月的第几个星期几
@@ -28,7 +28,7 @@ const getWeekDay = (week, num, month, year = getYear(month)) => {
  */
 const getLunar2Solar = (month, date) => {
   // prettier-ignore
-  var lunarInfo = [
+  let lunarInfo = [
     0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2, // 1900-1909
     0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977, // 1910-1919
     0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970, // 1920-1929
@@ -52,8 +52,8 @@ const getLunar2Solar = (month, date) => {
     0x0d520 // 2100
   ]
   const lYearDays = (y) => {
-    var i
-    var sum = 348
+    let i
+    let sum = 348
     for (i = 0x8000; i > 0x8; i >>= 1) {
       sum += lunarInfo[y - 1900] & i ? 1 : 0
     }
@@ -79,17 +79,17 @@ const getLunar2Solar = (month, date) => {
     if ((y === 2100 && m === 12 && d > 1) || (y === 1900 && m === 1 && d < 31)) {
       return -1
     }
-    var day = monthDays(y, m)
-    var _day = day
+    let day = monthDays(y, m)
+    let _day = day
     if (y < 1900 || y > 2100 || d > _day) {
       return -1
     }
-    var offset = 0
-    for (var i = 1900; i < y; i++) {
+    let offset = 0
+    for (let i = 1900; i < y; i++) {
       offset += lYearDays(i)
     }
-    var leap = 0
-    var isAdd = false
+    let leap = 0
+    let isAdd = false
     for (i = 1; i < m; i++) {
       leap = leapMonth(y)
       if (!isAdd) {
@@ -100,11 +100,11 @@ const getLunar2Solar = (month, date) => {
       }
       offset += monthDays(y, i)
     }
-    var stmap = Date.UTC(1900, 1, 30, 0, 0, 0)
-    var calObj = new Date((offset + d - 31) * 86400000 + stmap)
-    var cY = calObj.getUTCFullYear()
-    var cM = calObj.getUTCMonth() + 1
-    var cD = calObj.getUTCDate()
+    let stmap = Date.UTC(1900, 1, 30, 0, 0, 0)
+    let calObj = new Date((offset + d - 31) * 86400000 + stmap)
+    let cY = calObj.getUTCFullYear()
+    let cM = calObj.getUTCMonth() + 1
+    let cD = calObj.getUTCDate()
     return { year: cY, month: cM, day: cD }
   }
   const cal = lunar2solar(getYear(month), month, date)

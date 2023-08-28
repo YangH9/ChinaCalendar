@@ -6,7 +6,7 @@
 
 > https://yangh9.github.io/ChinaHolidayCalender/cal.ics
 
-更新时间：2023-07-07 15:50:36
+更新时间：2023-08-28 17:37:43
 
 ### 订阅方式
 
