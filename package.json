@@ -1,6 +1,6 @@
 {
   "name": "chinaholidaycalender",
-  "description": "中国节假日调休日历",
+  "description": "中国节日、纪念日和假日调休、补班日历",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
