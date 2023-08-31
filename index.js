@@ -5,8 +5,8 @@ const { writeReadme } = require('./models/writeFile')
 
 globalThis.uName = 'yangh9'
 globalThis.nowDate = new Date()
-globalThis.nowTime = globalThis.nowDate.toFormat('YYYY-MM-DD hh:mm')
-globalThis.nowTimeReg = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}/
+globalThis.nowTime = globalThis.nowDate.toFormat('YYYY-MM-DD')
+globalThis.nowTimeReg = /\d{4}-\d{2}-\d{2}/
 globalThis.modified = globalThis.nowDate.toFormat()
 globalThis.calName = '中国节日、纪念日、假日日历'
 globalThis.calDesc = `2020~2023年中国人民共和国节日、纪念日和假日调休、补班日历。更新时间：${globalThis.nowTime}`
