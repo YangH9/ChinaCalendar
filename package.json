@@ -5,10 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
+    "pull": "git pull",
+    "commit": "git add . & git commit -m [update]",
+    "push": "git push",
     "pull_push": "git pull & git add . & git commit -m [update] & git push"
   },
   "scripts-info": {
     "start": "生成cal.ics文件",
+    "pull": "拉取",
+    "commit": "暂存",
+    "push": "推送",
     "pull_push": "拉取、暂存、推送"
   },
   "repository": {
