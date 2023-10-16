@@ -6,10 +6,23 @@
  * @param {Number} week 周几
  * @returns {String} 时间 year/month/date
  */
-const getWeekDay = (year, month, num, week) => {
-  const firstWeek = new Date(year, month - 1, 1).getDay()
-  const date = week - firstWeek + num * 7 + 1
-  return `${year}/${month}/${date}`
+const getWeekDay = (year, month, ordinal, dayOfWeek) => {
+  // const firstWeek = new Date(year, month - 1, 1).getDay()
+  // const date = week - firstWeek + num * 7 + 1
+  // console.log(`${year}/${month}/${date}`, num, date)
+  // return `${year}/${month}/${date}`
+  const date = new Date(year, month - 1) // Date 构造函数中月份是从 0 开始的
+  let count = 0
+  while (date.getMonth() === month - 1) {
+    if (date.getDay() === dayOfWeek) {
+      count++
+      if (count === ordinal) {
+        return `${year}-${month}-${date.getDate()}`
+      }
+    }
+    date.setDate(date.getDate() + 1)
+  }
+  return null // 没有找到匹配的日期
 }
 
 /**
@@ -566,7 +579,7 @@ exports.list = globalThis.yearList
           type: 'festival'
         },
         {
-          time: `${getWeekDay(year, 10, 2, 3)}`,
+          time: `${year}/10/13`,
           summary: '国际减轻自然灾害日',
           description:
             '国际减轻自然灾害日(十月的第二个星期三)。\n国际减轻自然灾害日是由联合国大会1989年定于每年十月的第二个星期三。2009年，联合国大会通过决议改为每年10月13日国际减轻自然灾害日，简称“国际减灾日”。\n自然灾害是当今世界面临的重大问题之一，严重影响经济、社会的可持续发展和威胁人类的生存。联合国于1987年12月11日确定20世纪90年代为“国际减轻自然灾害十年”(IDNDR)。所谓“减轻自然灾害”，一般是指减轻由潜在的自然灾害可能造成对社会及环境影响的程度，即最大限度地减少人员伤亡和财产损失，使公众的社会和经济结构在灾害中受到的破坏得以减轻到最低程度。',
