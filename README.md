@@ -6,6 +6,6 @@
 
 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics)
 
-更新时间：2023-10-16
+更新时间：2023-10-17
 
 [使用说明](https://yangh9.github.io/ChinaHolidayCalender/)

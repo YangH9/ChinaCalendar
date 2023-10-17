@@ -7,17 +7,13 @@
  * @returns {String} 时间 year/month/date
  */
 const getWeekDay = (year, month, ordinal, dayOfWeek) => {
-  // const firstWeek = new Date(year, month - 1, 1).getDay()
-  // const date = week - firstWeek + num * 7 + 1
-  // console.log(`${year}/${month}/${date}`, num, date)
-  // return `${year}/${month}/${date}`
   const date = new Date(year, month - 1) // Date 构造函数中月份是从 0 开始的
   let count = 0
   while (date.getMonth() === month - 1) {
     if (date.getDay() === dayOfWeek) {
       count++
       if (count === ordinal) {
-        return `${year}-${month}-${date.getDate()}`
+        return `${year}/${month}/${date.getDate()}`
       }
     }
     date.setDate(date.getDate() + 1)
@@ -532,7 +528,8 @@ exports.list = globalThis.yearList
         {
           time: `${year}/8/15`,
           summary: `日本宣布无条件投降${year - 1945}年`,
-          description: '1945年8月15日，日本宣布无条件投降！勿忘国耻，吾辈自强！',
+          description:
+            '1945年8月15日，日本宣布无条件投降！勿忘国耻，吾辈自强！\n日本投降（Japanese surrender）是第二次世界大战结束的标志。1945年8月15日正午，日本天皇向全日本广播，接受中美英三国促令日本投降之波茨坦公告、实行无条件投降，结束战争。1945年9月2日上午9时，标志着第二次世界大战结束的日本投降的签字仪式，在停泊在东京湾的密苏里号主甲板上举行。\n1945年8月21日今井武夫飞抵芷江洽降。1945年9月2日上午9时，日本外相重光葵代表日本天皇和政府、陆军参谋长梅津美治郎代表日军大本营在投降书上签字。',
           type: 'festival'
         },
         {
