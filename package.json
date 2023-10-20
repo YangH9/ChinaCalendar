@@ -8,7 +8,8 @@
     "pull": "git pull",
     "commit": "git add . & git commit -m [update]",
     "push": "git push",
-    "pull_push": "git pull & git add . & git commit -m [update] & git push"
+    "pull_push": "git pull & git add . & git commit -m [update] & git push",
+    "update_pages": "node models/updatePages"
   },
   "scripts-info": {
     "start": "生成cal.ics文件",
@@ -30,7 +31,8 @@
   "license": "MIT",
   "dependencies": {
     "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "puppeteer": "^21.3.8"
   },
   "directories": {
     "doc": "doc"
