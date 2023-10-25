@@ -6,7 +6,7 @@
 
 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics)
 
-更新时间：2023-10-24
+更新时间：2023-10-25
 
 ### 订阅方式
 

@@ -1,6 +1,6 @@
 /**
 
-http://www.gov.cn/zhengce/content/2022-12/08/content_5730844.htm
+https://www.gov.cn/zhengce/content/2022-12/08/content_5730844.htm
 
 一、元旦：2022年12月31日至2023年1月2日放假调休，共3天。
 
@@ -16,7 +16,7 @@ http://www.gov.cn/zhengce/content/2022-12/08/content_5730844.htm
 
  */
 
-exports.govUrl = 'http://www.gov.cn/zhengce/content/2022-12/08/content_5730844.htm'
+exports.govUrl = 'https://www.gov.cn/zhengce/content/2022-12/08/content_5730844.htm'
 exports.list = [
   {
     summary: '元旦',

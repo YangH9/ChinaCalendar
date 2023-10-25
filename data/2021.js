@@ -1,6 +1,6 @@
 /**
 
-http://www.gov.cn/zhengce/content/2020-11/25/content_5564127.htm
+https://www.gov.cn/zhengce/content/2020-11/25/content_5564127.htm
 
 一、元旦：2021年1月1日至3日放假，共3天。
 
@@ -18,7 +18,7 @@ http://www.gov.cn/zhengce/content/2020-11/25/content_5564127.htm
 
  */
 
-exports.govUrl = 'http://www.gov.cn/zhengce/content/2020-11/25/content_5564127.htm'
+exports.govUrl = 'https://www.gov.cn/zhengce/content/2020-11/25/content_5564127.htm'
 exports.list = [
   {
     summary: '元旦',

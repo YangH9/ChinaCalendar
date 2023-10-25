@@ -1,6 +1,6 @@
 /**
 
-http://www.gov.cn/zhengce/content/2019-11/21/content_5454164.htm
+https://www.gov.cn/zhengce/content/2019-11/21/content_5454164.htm
 
 一、元旦：2020年1月1日放假，共1天。
 
@@ -16,7 +16,7 @@ http://www.gov.cn/zhengce/content/2019-11/21/content_5454164.htm
 
  */
 
-exports.govUrl = 'http://www.gov.cn/zhengce/content/2019-11/21/content_5454164.htm'
+exports.govUrl = 'https://www.gov.cn/zhengce/content/2019-11/21/content_5454164.htm'
 exports.list = [
   {
     summary: '元旦',
