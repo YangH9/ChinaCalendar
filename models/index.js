@@ -145,13 +145,14 @@ exports.solarTermsBody = () => {
   return yearList
     .map((year) => {
       return new Array(24).fill(1).map((_, i) => {
-        const num = i + 1
-        const time = `${year}/${~~(i / 2) + 1}/${getSolarTerm(year, num)}`
-        const name = solarTerms[num]
+        const time = `${year}/${~~(i / 2) + 1}/${getSolarTerm(year, i + 1)}`
+        const name = solarTerms[i]
         const timeDate = `VALUE=DATE:${new Date(time).toFormat('YYYYMMDD')}`
         const timeT = new Date(`${time} 00:00:01`).toFormat()
         const UID = `${timeT}_solarTerm_${keyId++}@${uName}`
-        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${name}」\r\nDESCRIPTION:${name}，${year}年第${num}个节气\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${name}」\r\nDESCRIPTION:${name}，${year}年第${
+          i + 1
+        }个节气\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
     .flat(2)
