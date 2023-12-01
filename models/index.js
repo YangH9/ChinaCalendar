@@ -1,3 +1,6 @@
+const { readdirSync } = require('fs')
+const { join } = require('path')
+
 if (!Date.prototype.toFormat) {
   ;(function () {
     Date.prototype.toFormat = function (pattern = 'YYYYMMDDThhmmss') {
@@ -36,40 +39,121 @@ if (!Date.prototype.toFormat) {
   })()
 }
 
-let keyId = 1
+const solarTerm = {
+  // 24节气速查表 ["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
+  // prettier-ignore
+  solarTerms : ["\u5c0f\u5bd2", "\u5927\u5bd2", "\u7acb\u6625", "\u96e8\u6c34", "\u60ca\u86f0", "\u6625\u5206", "\u6e05\u660e", "\u8c37\u96e8", "\u7acb\u590f", "\u5c0f\u6ee1", "\u8292\u79cd", "\u590f\u81f3", "\u5c0f\u6691", "\u5927\u6691", "\u7acb\u79cb", "\u5904\u6691", "\u767d\u9732", "\u79cb\u5206", "\u5bd2\u9732", "\u971c\u964d", "\u7acb\u51ac", "\u5c0f\u96ea", "\u5927\u96ea", "\u51ac\u81f3"],
 
-exports.listFormat = (list, govUrl) => {
-  const arr = []
-  list?.map((item) => {
-    let hnum = 0
-    let cnum = 0
-    let hsnum = item.timeList.filter((i) => i.type === 'holiday').length
-    let csnum = item.timeList.filter((i) => i.type === 'compensateday').length
-    item.timeList.map((i) => {
-      let timeDate = `VALUE=DATE:${new Date(i.time).toFormat('YYYYMMDD')}`
-      let timeT = new Date(`${i.time} 00:00:01`).toFormat()
-      let UID = `${timeT}_${i.type}_${keyId++}@${globalThis.uName}`
-      let time09 = new Date(`${i.time} 09:00`).toFormat()
-      let time18 = new Date(`${i.time} 18:00`).toFormat()
-      if (i.type === 'holiday') {
-        hnum++
-        // 法定休假日
-        arr.push(
-          `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsnum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${globalThis.calDesc}\r\nLAST-MODIFIED:${globalThis.modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
-        )
-      } else if (i.type === 'compensateday') {
-        cnum++
-        // 法定补班日
-        arr.push(
-          `BEGIN:VEVENT\r\nDTSTART:${time09}\r\nDTEND:${time18}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${cnum}天/共${csnum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${globalThis.calDesc}\r\nLAST-MODIFIED:${globalThis.modified}\r\nSTATUS:TENTATIVE\r\nTRANSP:OPAQUE\r\nSEQUENCE:1\r\nBEGIN:VALARM\r\nTRIGGER:-PT60M\r\nACTION:DISPLAY\r\nEND:VALARM\r\nEND:VEVENT\r\n`
-        )
+  // 1900-2100各年的24节气日期速查表
+  // prettier-ignore
+  solarTermInfo : [
+    '97b6b7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa', '97b6b7f0e47f531b0723b0b6fb0721',
+    '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722', '9778397bd097c36b0b6fc9274c91aa', '97b6b7f0e47f531b0723b0787b0721', '7f0e27f0e47f531b0b0bb0b6fb0722',
+    '7f0e397bd07f595b0b0bc920fb0722', '9778397bd097c36b0b6fc9210c91aa', '97b6b7f0e47f149b0723b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722',
+    '9778397bd097c36b0b6fc9210c8dc2', '977837f0e37f149b0723b0787b0721', '7f07e7f0e47f531b0723b0b6fb0722', '7f0e37f5307f595b0b0bc920fb0722', '7f0e397bd097c35b0b6fc9210c8dc2',
+    '977837f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e37f1487f595b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc9210c8dc2', '977837f0e37f14998082b0787b06bd',
+    '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721',
+    '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722',
+    '7f0e397bd07f595b0b0bc920fb0722', '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722',
+    '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f149b0723b0787b0721', '7f0e27f0e47f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722', '977837f0e37f14998082b0723b06bd',
+    '7f07e7f0e37f149b0723b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722', '977837f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b0721',
+    '7f07e7f0e47f531b0723b0b6fb0722', '7f0e37f1487f595b0b0bb0b6fb0722', '7f0e37f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0722',
+    '7f0e37f1487f531b0b0bb0b6fb0722', '7f0e37f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e37f1487f531b0b0bb0b6fb0722',
+    '7f0e37f0e37f14898082b072297c35', '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e37f0e37f14898082b072297c35',
+    '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14998082b0787b06bd',
+    '7f07e7f0e47f149b0723b0787b0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14998082b0723b06bd', '7f07e7f0e47f149b0723b0787b0721',
+    '7f0e27f0e47f531b0723b0b6fb0722', '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14998082b0723b06bd', '7f07e7f0e37f14998083b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722',
+    '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14898082b0723b02d5', '7f07e7f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0722', '7f0e36665b66aa89801e9808297c35',
+    '665f67f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0722', '7f0e36665b66a449801e9808297c35', '665f67f0e37f14898082b0723b02d5',
+    '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e36665b66a449801e9808297c35', '665f67f0e37f14898082b072297c35', '7ec967f0e37f14998082b0787b06bd',
+    '7f07e7f0e47f531b0723b0b6fb0721', '7f0e26665b66a449801e9808297c35', '665f67f0e37f1489801eb072297c35', '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721',
+    '7f0e27f1487f531b0b0bb0b6fb0722'
+  ],
+  getSolarTerm: (y, n) => {
+    if (y < 2000 || y > 2100) {
+      return -1
+    }
+    if (n < 1 || n > 24) {
+      return -1
+    }
+    const key = solarTerm.solarTermInfo[y - 2000]
+    const keyInfo = new Array(6).fill(1).map((_, i) => `${+`0x${key.slice(i * 5, (i + 1) * 5)}`}`)
+    const calDay = new Array(24)
+      .fill(1)
+      .map((_, i) =>
+        keyInfo[~~(i / 4)].slice([0, 1, 3, 4][i % 4], [0, 1, 3, 4][i % 4] + 1 + (i % 2))
+      )
+    return +calDay[n - 1]
+  }
+}
+
+/**
+ * @description: 日历数据生成
+ * @returns {String} 日历数据
+ */
+exports.calenderBody = () => {
+  let keyId = 1
+  const { filePath, uName, calDesc, modified } = globalThis
+  return readdirSync(filePath)
+    .map((fileName) => {
+      if (/.js$/i.test(fileName)) {
+        const { list, govUrl } = require(join(filePath, fileName))
+        return list.map((item) => {
+          let hnum = 0
+          let cnum = 0
+          const hsnum = item.timeList.filter((i) => i.type === 'holiday').length
+          const csnum = item.timeList.filter((i) => i.type === 'compensateday').length
+          return item.timeList.map((i) => {
+            const timeDate = `VALUE=DATE:${new Date(i.time).toFormat('YYYYMMDD')}`
+            const timeT = new Date(`${i.time} 00:00:01`).toFormat()
+            const UID = `${timeT}_${i.type}_${keyId++}@${uName}`
+            const time09 = new Date(`${i.time} 09:00`).toFormat()
+            const time18 = new Date(`${i.time} 18:00`).toFormat()
+            if (i.type === 'holiday') {
+              hnum++
+              // 法定休假日
+              // prettier-ignore
+              return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsnum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+            } else if (i.type === 'compensateday') {
+              cnum++
+              // 法定补班日
+              // prettier-ignore
+              return `BEGIN:VEVENT\r\nDTSTART:${time09}\r\nDTEND:${time18}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${cnum}天/共${csnum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:TENTATIVE\r\nTRANSP:OPAQUE\r\nSEQUENCE:1\r\nBEGIN:VALARM\r\nTRIGGER:-PT60M\r\nACTION:DISPLAY\r\nEND:VALARM\r\nEND:VEVENT\r\n`
+            } else {
+              // 其他节日
+              // prettier-ignore
+              return`BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${i.summary}」\r\nDESCRIPTION:${i.description}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+            }
+          })
+        })
       } else {
-        // 其他节日
-        arr.push(
-          `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${i.summary}」\r\nDESCRIPTION:${i.description}\\n\\n${globalThis.calDesc}\r\nLAST-MODIFIED:${globalThis.modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
-        )
+        return ''
       }
     })
-  })
-  return arr.join('')
+    .flat(2)
+    .join('')
+}
+
+/**
+ * @description: 24节气
+ * @returns {String} 日历数据
+ */
+exports.solarTermsBody = () => {
+  let keyId = 1
+  const { uName, yearList, modified } = globalThis
+  const { solarTerms, getSolarTerm } = solarTerm
+  return yearList
+    .map((year) => {
+      return new Array(24).fill(1).map((_, i) => {
+        const num = i + 1
+        const time = `${year}/${~~(i / 2) + 1}/${getSolarTerm(year, num)}`
+        const name = solarTerms[num]
+        const timeDate = `VALUE=DATE:${new Date(time).toFormat('YYYYMMDD')}`
+        const timeT = new Date(`${time} 00:00:01`).toFormat()
+        const UID = `${timeT}_solarTerm_${keyId++}@${uName}`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${name}」\r\nDESCRIPTION:${name}，${year}年第${num}个节气\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+      })
+    })
+    .flat(2)
+    .join('')
 }

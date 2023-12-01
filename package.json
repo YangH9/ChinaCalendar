@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index",
     "pull": "git pull",
-    "commit": "git add . & git commit -m [update]",
+    "commit": "git add . & git commit -m [update]自动提交",
     "push": "git push",
-    "pull_push": "git pull & git add . & git commit -m [update] & git push",
+    "pull_push": "git pull & git add . & git commit -m [update]自动提交 & git push",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
@@ -25,7 +25,8 @@
   "keywords": [
     "中国节假日",
     "法定节假日",
-    "日历"
+    "日历",
+    "二十四节气"
   ],
   "author": "yangh9",
   "license": "MIT",

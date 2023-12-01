@@ -1,3 +1,5 @@
+const { yearList } = globalThis
+
 /**
  * @description: 获取几月的第几个星期几
  * @param {Number} year 年份
@@ -131,7 +133,7 @@ const getChuXi = (year) =>
     : getLunar2Solar(year, 12, 30)
 
 // 按年份数据生成多年的固定节日表
-exports.list = globalThis.yearList
+exports.list = yearList
   .map((year) => [
     {
       title: '全体公民放假的节日',

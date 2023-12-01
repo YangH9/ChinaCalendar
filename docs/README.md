@@ -1,12 +1,16 @@
 # ChinaHolidayCalender
 
-# 中国节日、纪念日和假日调休、补班日历
+## 中国节日、纪念日和假日调休、补班日历
 
-日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal.ics](https://yangh9.github.io/ChinaHolidayCalender/cal.ics)
+* 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal.ics](https://yangh9.github.io/ChinaHolidayCalender/cal.ics)
+* 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics)
 
-快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal.ics)
+## 二十四节气日历
 
-更新时间：2023-10-31
+* 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/solarTerms.ics](https://yangh9.github.io/ChinaHolidayCalender/solarTerms.ics)
+* 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/solarTerms.ics](https://yangh9.gitee.io/ChinaHolidayCalender/solarTerms.ics)
+
+> 更新时间：2023-12-01
 
 ### 订阅方式
 
