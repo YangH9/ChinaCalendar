@@ -77,12 +77,10 @@ const solarTerm = {
       return -1
     }
     const key = solarTerm.solarTermInfo[y - 2000]
-    const keyInfo = new Array(6).fill(1).map((_, i) => `${+`0x${key.slice(i * 5, (i + 1) * 5)}`}`)
-    const calDay = new Array(24)
-      .fill(1)
-      .map((_, i) =>
-        keyInfo[~~(i / 4)].slice([0, 1, 3, 4][i % 4], [0, 1, 3, 4][i % 4] + 1 + (i % 2))
-      )
+    const keyInfo = Array.from({ length: 6 }, (_, i) => `${+`0x${key.slice(i * 5, (i + 1) * 5)}`}`)
+    const calDay = Array.from({ length: 24 }, (_, i) =>
+      keyInfo[~~(i / 4)].slice([0, 1, 3, 4][i % 4], [0, 1, 3, 4][i % 4] + 1 + (i % 2))
+    )
     return +calDay[n - 1]
   }
 }
@@ -144,7 +142,7 @@ exports.solarTermsBody = () => {
   const { solarTerms, getSolarTerm } = solarTerm
   return yearList
     .map((year) => {
-      return new Array(24).fill(1).map((_, i) => {
+      return Array.from({ length: 24 }, (_, i) => {
         const time = `${year}/${~~(i / 2) + 1}/${getSolarTerm(year, i + 1)}`
         const name = solarTerms[i]
         const timeDate = `VALUE=DATE:${new Date(time).toFormat('YYYYMMDD')}`
