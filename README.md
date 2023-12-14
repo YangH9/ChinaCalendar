@@ -10,7 +10,7 @@
 * 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/solarTerms.ics](https://yangh9.github.io/ChinaHolidayCalender/solarTerms.ics)
 * 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/solarTerms.ics](https://yangh9.gitee.io/ChinaHolidayCalender/solarTerms.ics)
 
-> 更新时间：2023-12-01
+> 更新时间：2023-12-14
 
 ### 订阅方式
 
