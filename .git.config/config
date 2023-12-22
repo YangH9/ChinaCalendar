@@ -13,22 +13,10 @@
 [lfs]
 	repositoryformatversion = 0
 [remote "origin"]
-	url = https://github.com/YangH9/ChinaHolidayCalender.git
-	fetch = +refs/heads/*:refs/remotes/origin/*
-[remote "all"]
 	# github地址
 	url = https://github.com/YangH9/ChinaHolidayCalender.git
 	# gitee地址
 	url = https://gitee.com/YangH9/ChinaHolidayCalender.git
-	fetch = +refs/heads/*:refs/remotes/all/*
-	tagopt = --no-tags
-[remote "gitee"]
-	url = https://gitee.com/YangH9/ChinaHolidayCalender.git
-	fetch = +refs/heads/*:refs/remotes/gitee/*
-	tagopt = --no-tags
-[remote "github"]
-	url = https://github.com/YangH9/ChinaHolidayCalender.git
-	fetch = +refs/heads/*:refs/remotes/github/*
-	tagopt = --no-tags
+	fetch = +refs/heads/*:refs/remotes/origin/*
 [remote]
 	pushdefault = origin
