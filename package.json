@@ -5,18 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "pull": "git pull",
+    "pull": "git pull origin master",
     "commit": "git add . & git commit -m [update]自动提交",
-    "push": "git push",
-    "commit_push": "git add . & git commit -m [update]自动提交 & git push",
+    "push": "git push origin master",
+    "push_all": "git push all master",
+    "push_gitee": "git push gitee master",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
     "start": "生成cal.ics文件",
-    "pull": "拉取",
+    "pull": "拉取github",
     "commit": "暂存",
-    "push": "推送",
-    "pull_push": "拉取、暂存、推送"
+    "push": "推送github",
+    "push_all": "推送github、gitee",
+    "push_gitee": "推送gitee"
   },
   "repository": {
     "type": "git",
