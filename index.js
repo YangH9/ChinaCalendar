@@ -23,7 +23,23 @@ readdirSync(globalThis.filePath).forEach((fileName) => {
 })
 globalThis.yearList.push(globalThis.yearList.at(-1) + 1)
 // prettier-ignore
-globalThis.calDesc = `${globalThis.yearList[0]}~${globalThis.yearList.at( -1)}年中国人民共和国节日、纪念日和假日调休、补班日历。更新时间：${globalThis.nowTime}`
+globalThis.calDesc = `${globalThis.yearList[0]}~${globalThis.yearList.at( -1)}年中华人民共和国节日、纪念日和假日调休、补班日历。更新时间：${globalThis.nowTime}`
+
+// 完整日历
+// 节假日日历
+// 节日纪念日
+// 24节气
+// 天干地支农历
+// 勿忘国耻
+const calendarList = [
+  { title: '中华人民共和国节日、纪念日、假日调休、24节气、天干地支农历日历', key: 'cal' },
+  { title: '中华人民共和国节假日日历', key: 'cal_holidays' },
+  { title: '中华人民共和国节日纪念日日历', key: 'cal_festival' },
+  { title: '中华人民共和国24节气日历', key: 'cal_solarTerms' },
+  { title: '中华人民共和国农历日历', key: 'cal_lunar' },
+  { title: '中华人民共和国天干地支日历', key: 'cal_stemsAndBranches' },
+  { title: '中华人民共和国勿忘国耻日历', key: 'cal_neverForgetNationalShame' }
+]
 
 writeCalendar()
 writeSolarTerms()
