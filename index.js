@@ -26,17 +26,11 @@ globalThis.yearList.push(globalThis.yearList.at(-1) + 1)
 // prettier-ignore
 globalThis.calDesc = `${globalThis.yearList[0]}~${globalThis.yearList.at( -1)}年中华人民共和国节日、纪念日和假日调休、补班日历。更新时间：${globalThis.nowTime}`
 
-// 完整日历
-// 节假日日历
-// 节日纪念日
-// 24节气
-// 天干地支农历
-// 勿忘国耻
 globalThis.calendarList = [
-  { title: '中华人民共和国节日、纪念日、假日调休、24节气、天干地支农历日历', key: 'all', file: 'calender.ics' },
+  { title: '中华人民共和国节日、纪念日、假日调休、二十四节气、天干地支农历日历', key: 'all', file: 'calender.ics' },
   { title: '中华人民共和国节假日日历', key: 'holiday', file: 'cal_holiday.ics' },
   { title: '中华人民共和国节日纪念日日历', key: 'festival', file: 'cal_festival.ics' },
-  { title: '中华人民共和国24节气日历', key: 'solarTerm', file: 'cal_solarTerm.ics' }
+  { title: '中华人民共和国二十四节气日历', key: 'solarTerm', file: 'cal_solarTerm.ics' }
   // { title: '中华人民共和国农历日历', key: 'lunar', file: 'cal_lunar.ics' },
   // { title: '中华人民共和国天干地支日历', key: 'stemsBranches', file: 'cal_stemsBranches.ics' },
   // { title: '中华人民共和国勿忘国耻日历', key: 'nationalShame', file: 'cal_nationalShame.ics' }

@@ -31,11 +31,11 @@ if (!Date.prototype.toFormat) {
 }
 
 const solarTermData = {
-  // 24节气速查表 ["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
+  // 二十四节气速查表 ["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
   // prettier-ignore
   solarTerms : ["\u5c0f\u5bd2", "\u5927\u5bd2", "\u7acb\u6625", "\u96e8\u6c34", "\u60ca\u86f0", "\u6625\u5206", "\u6e05\u660e", "\u8c37\u96e8", "\u7acb\u590f", "\u5c0f\u6ee1", "\u8292\u79cd", "\u590f\u81f3", "\u5c0f\u6691", "\u5927\u6691", "\u7acb\u79cb", "\u5904\u6691", "\u767d\u9732", "\u79cb\u5206", "\u5bd2\u9732", "\u971c\u964d", "\u7acb\u51ac", "\u5c0f\u96ea", "\u5927\u96ea", "\u51ac\u81f3"],
 
-  // 1900-2100各年的24节气日期速查表
+  // 1900-2100各年的二十四节气日期速查表
   // prettier-ignore
   solarTermInfo : [
     '97b6b7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa', '97b6b7f0e47f531b0723b0b6fb0721',
@@ -75,13 +75,14 @@ const solarTermData = {
 }
 
 let AllKeyId = 1
+
 /**
  * @description: 法定节假日
  * @returns {String} 日历数据
  */
-const holidayBody = (all) => {
+const holidayBody = (calDesc, all) => {
   let keyId = 1
-  const { yearList, filePath, uName, calDesc, modified } = globalThis
+  const { yearList, filePath, uName, modified } = globalThis
   return yearList
     .slice(0, -1)
     .map((year) => {
@@ -118,9 +119,9 @@ const holidayBody = (all) => {
  * @description: 节日
  * @returns {String} 日历数据
  */
-const festivalBody = (all) => {
+const festivalBody = (calDesc, all) => {
   let keyId = 1
-  const { filePath, uName, calDesc, modified } = globalThis
+  const { filePath, uName, modified } = globalThis
   const { list } = require(join(filePath, 'ChineseFestival.js'))
   return list
     .map((item) => {
@@ -136,10 +137,10 @@ const festivalBody = (all) => {
 }
 
 /**
- * @description: 24节气
+ * @description: 二十四节气
  * @returns {String} 日历数据
  */
-const solarTermBody = (all) => {
+const solarTermBody = (calDesc, all) => {
   let keyId = 1
   const { uName, yearList, modified } = globalThis
   const { solarTerms, getSolarTerm } = solarTermData
@@ -152,7 +153,7 @@ const solarTermBody = (all) => {
         const timeT = new Date(`${time} 00:00:01`).toFormat()
         const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
-        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${name}』\r\nDESCRIPTION:${name}，${year}年第${i + 1}个节气\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${name}』\r\nDESCRIPTION:${name}，${year}年第${i + 1}个节气\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
     .flat(2)
@@ -163,8 +164,8 @@ const solarTermBody = (all) => {
  * @description: 全部日历汇总
  * @returns {String} 日历数据
  */
-const allBody = () => {
-  return `${holidayBody(true)}${festivalBody(true)}${solarTermBody(true)}`
+const allBody = (calDesc) => {
+  return `${holidayBody(calDesc, true)}${festivalBody(calDesc, true)}${solarTermBody(calDesc, true)}`
 }
 
 const calenderOption = {
@@ -180,12 +181,11 @@ const calenderOption = {
  * @returns {Object}
  */
 exports.calenderInit = () => {
-  const { uName, yearList, modified, nowTime, calendarList } = globalThis
+  const { uName, yearList, nowTime, calendarList } = globalThis
   calendarList.map((item) => {
-    // item.title
-    // item.key
+    const calDesc = `${yearList[0]}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
     // prettier-ignore
-    item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${yearList[0]}~${yearList.at( -1)}年${item.title}。更新时间：${nowTime}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calenderOption[item.key]()}END:VCALENDAR`
+    item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calenderOption[item.key](calDesc)}END:VCALENDAR`
   })
   // console.log(calendarList)
 }
