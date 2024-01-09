@@ -32,7 +32,9 @@
 * 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics)
 * 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics)
 
-### 订阅方式
+## 订阅方式
+
+> 复制完整链接至下述目标区域粘贴订阅
 
 #### 苹果设备订阅
 
