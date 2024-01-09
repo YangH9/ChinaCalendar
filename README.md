@@ -2,27 +2,31 @@
 
 ## 中华人民共和国节日、纪念日、假日调休、二十四节气、天干地支农历日历
 
+> 更新时间：2024-01-09
+
 ### 完整版
 
-* 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/calender.ics](https://yangh9.github.io/ChinaHolidayCalender/calender.ics)
-* 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics](https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics)
+> 包含所有类型日历，一次全部订阅，体积较大
+
+* 订阅链接：[主站点](https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics)，[备用站点](https://yangh9.github.io/ChinaHolidayCalender/calender.ics)
 
 ### 法定节假日
 
-* 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics)
-* 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_holiday.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_holiday.ics)
+> 打工人放假日历，国务院发布的放假补班通知，含休假补班日
+
+* 订阅链接：[主站点](https://yangh9.gitee.io/ChinaHolidayCalender/cal_holiday.ics)，[备用站点](https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics)
 
 ### 节日纪念日
 
-* 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics)
-* 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_festival.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_festival.ics)
+> 中国传统节日部分流行节日纪念日日历
 
-## 二十四节气
+* 订阅链接：[主站点](https://yangh9.gitee.io/ChinaHolidayCalender/cal_festival.ics)，[备用站点](https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics)
 
-* 日历订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics)
-* 快速站点：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics)
+### 二十四节气
 
-> 更新时间：2024-01-09
+> 中国二十四节气日历
+
+* 订阅链接：[主站点](https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics)，[备用站点](https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics)
 
 ### 订阅方式
 
