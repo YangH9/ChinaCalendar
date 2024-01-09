@@ -130,8 +130,8 @@ const getQiuFen = (year) => {
 const getChuXi = (year) => (getLunar2Solar(year, 12, 30) === 'undefined/undefined/undefined' ? getLunar2Solar(year, 12, 29) : getLunar2Solar(year, 12, 30))
 
 // 按年份数据生成多年的固定节日表
-exports.list = yearList
-  .map((year) => [
+exports.list = (year) =>
+  [
     {
       title: '全体公民放假的节日',
       timeList: [
@@ -709,5 +709,4 @@ exports.list = yearList
         }
       ]
     }
-  ])
-  .flat(1)
+  ].flatMap((i) => i.timeList)

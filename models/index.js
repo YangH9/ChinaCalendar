@@ -121,11 +121,11 @@ const holidayBody = (calDesc, all) => {
  */
 const festivalBody = (calDesc, all) => {
   let keyId = 1
-  const { filePath, uName, modified } = globalThis
+  const { filePath, uName, yearList, modified } = globalThis
   const { list } = require(join(filePath, 'ChineseFestival.js'))
-  return list
-    .map((item) => {
-      return item.timeList.map((i) => {
+  return yearList
+    .map((year) => {
+      return list(year).map((i) => {
         const timeDate = `VALUE=DATE:${new Date(i.time).toFormat('YYYYMMDD')}`
         const timeT = new Date(`${i.time} 00:00:01`).toFormat()
         const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
@@ -187,5 +187,4 @@ exports.calenderInit = () => {
     // prettier-ignore
     item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calenderOption[item.key](calDesc)}END:VCALENDAR`
   })
-  // console.log(calendarList)
 }
