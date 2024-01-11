@@ -130,7 +130,7 @@ const lunarBody = (calDesc, all) => {
  * @returns {String} 日历数据
  */
 const allBody = (calDesc) => {
-  return `${holidayBody(calDesc, true)}${festivalBody(calDesc, true)}${solarTermBody(calDesc, true)}${lunarBody(calDesc, true)}`
+  return `${holidayBody(calDesc, true)}${festivalBody(calDesc, true)}${solarTermBody(calDesc, true)}`
 }
 
 const calenderOption = {
