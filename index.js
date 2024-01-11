@@ -1,13 +1,13 @@
 const { readdirSync } = require('fs')
 const { resolve } = require('path')
-const { writeReadme, writeCalendar } = require('./models/writeFile')
-const { calenderInit } = require('./models')
+const { calenderInit, writeCalendar } = require('./models')
+const dayjs = require('dayjs')
 
 globalThis.uName = 'yangh9'
-globalThis.nowDate = new Date()
-globalThis.nowTime = globalThis.nowDate.toFormat('YYYY-MM-DD')
+globalThis.nowDate = dayjs()
+globalThis.nowTime = globalThis.nowDate.format('YYYY-MM-DD')
 globalThis.nowTimeReg = /\d{4}-\d{2}-\d{2}/
-globalThis.modified = globalThis.nowDate.toFormat()
+globalThis.modified = globalThis.nowDate.format('YYYYMMDDTHHmmss')
 globalThis.yearList = []
 globalThis.filePath = resolve('data')
 
@@ -27,15 +27,14 @@ globalThis.yearList.push(globalThis.yearList.at(-1) + 1)
 globalThis.calDesc = `${globalThis.yearList[0]}~${globalThis.yearList.at( -1)}年中华人民共和国节日、纪念日和假日调休、补班日历。更新时间：${globalThis.nowTime}`
 
 globalThis.calendarList = [
-  { title: '中华人民共和国节日、纪念日、假日调休、二十四节气、天干地支农历日历', key: 'all', file: 'calender.ics' },
+  { title: '中华人民共和国节日、纪念日、假日调休、二十四节气、农历天干地支日历', key: 'all', file: 'calender.ics' },
   { title: '中华人民共和国节假日日历', key: 'holiday', file: 'cal_holiday.ics' },
   { title: '中华人民共和国节日纪念日日历', key: 'festival', file: 'cal_festival.ics' },
-  { title: '中华人民共和国二十四节气日历', key: 'solarTerm', file: 'cal_solarTerm.ics' }
-  // { title: '中华人民共和国农历日历', key: 'lunar', file: 'cal_lunar.ics' },
-  // { title: '中华人民共和国天干地支日历', key: 'stemsBranches', file: 'cal_stemsBranches.ics' },
-  // { title: '中华人民共和国勿忘国耻日历', key: 'nationalShame', file: 'cal_nationalShame.ics' }
+  { title: '中华人民共和国二十四节气日历', key: 'solarTerm', file: 'cal_solarTerm.ics' },
+  { title: '中华人民共和国农历、天干地支日历', key: 'lunar', file: 'cal_lunar.ics' },
+  // ,{ title: '中华人民共和国天干地支日历', key: 'stemsBranches', file: 'cal_stemsBranches.ics' },
+  // ,{ title: '中华人民共和国勿忘国耻日历', key: 'nationalShame', file: 'cal_nationalShame.ics' }
 ]
 
 calenderInit()
 writeCalendar()
-writeReadme()
