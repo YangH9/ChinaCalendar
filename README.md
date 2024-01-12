@@ -2,11 +2,11 @@
 
 ## 中华人民共和国节日、纪念日、假日调休、二十四节气、天干地支农历日历
 
-> 更新时间：2024-01-11
+> 更新时间：2024-01-12
 
 ### 完整版
 
-> 包含所有类型日历，一次全部订阅，体积较大
+> 包含所有类型日历（暂时除农历、天干地支），一次全部订阅，体积较大
 
 * 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics](https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics)
 * 备用：[https://yangh9.github.io/ChinaHolidayCalender/calender.ics](https://yangh9.github.io/ChinaHolidayCalender/calender.ics)
@@ -38,6 +38,13 @@
 
 * 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_lunar.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_lunar.ics)
 * 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_lunar.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_lunar.ics)
+
+### 天干地支、生辰八字
+
+> 中国天干地支、生辰八字日历
+
+* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_trunkBranch.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_trunkBranch.ics)
+* 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_trunkBranch.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_trunkBranch.ics)
 
 ## 订阅方式
 

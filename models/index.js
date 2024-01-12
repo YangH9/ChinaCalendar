@@ -2,7 +2,7 @@ const dayjs = require('dayjs')
 const isLeapYear = require('dayjs/plugin/isLeapYear')
 const { writeFileSync, readFileSync } = require('fs')
 const { join, resolve } = require('path')
-const { solarToLunar, getSolarTerm, solarTerms } = require('./calendar')
+const { solarToLunar, getSolarTerm, solarTerms, ganList, zhiList } = require('./calendar')
 
 dayjs.extend(isLeapYear)
 
@@ -75,7 +75,7 @@ const festivalBody = (calDesc, all) => {
         return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${i.summary}』\r\nDESCRIPTION:${i.description}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
-    .flat(2)
+    .flat()
     .join('')
 }
 
@@ -96,7 +96,7 @@ const solarTermBody = (calDesc, all) => {
         return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nDESCRIPTION:${summary}，${year}年第${i + 1}个节气\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
-    .flat(2)
+    .flat()
     .join('')
 }
 
@@ -113,12 +113,45 @@ const lunarBody = (calDesc, all) => {
       return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
         const time = item.add(index, 'day')
         const { timeDate, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
-        const timeData = solarToLunar(time.year(), time.month() + 1, time.date())
-        const summary = `${timeData.lYear}年 ${timeData.IMonthCn} ${timeData.IDayCn}`
-        const location = `${timeData.gzYear} ${timeData.Animal}年 ${timeData.gzMonth}月 ${timeData.gzDay}日`
+        const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
+        const summary = `${lunarData.lYear}年 ${lunarData.IMonthCn} ${lunarData.IDayCn}`
+        const location = `${lunarData.gzYear} ${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日`
         const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
         return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:「${location}」\r\nDESCRIPTION:${summary}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+      })
+    })
+    .flat()
+    .join('')
+}
+
+/**
+ * @description: 天干地支、生辰八字
+ * @returns {String} 日历数据
+ */
+const trunkBranchBody = (calDesc, all) => {
+  let keyId = 1
+  const { uName, yearList, modified } = globalThis
+  return yearList
+    .slice(-2)
+    .map((i) => {
+      let item = dayjs().year(i).startOf('year')
+      return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
+        const time = item.add(index, 'day')
+        const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
+        const ganIndex = ganList.findIndex((i) => i === lunarData.gzDay.slice(0, 1))
+        return Array.from({ length: 12 }, (_, index) => {
+          const start = time.add(index * 2 - 1, 'hour')
+          const ganzhi = `${ganList[(ganIndex * 2 + index) % 10]}${zhiList[index]}`
+          const timeT = start.second(1).format('YYYYMMDDTHHmmss')
+          const timeStart = start.format('YYYYMMDDTHHmmss')
+          const timeEnd = start.add(1, 'hour').endOf('hour').format('YYYYMMDDTHHmmss')
+          const summary = `${lunarData.gzYear}${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日 ${ganzhi}时`
+          const location = `${lunarData.gzYear} ${lunarData.gzMonth} ${lunarData.gzDay} ${ganzhi}`
+          const UID = `${timeT}_ganzhi_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+          // prettier-ignore
+          return `BEGIN:VEVENT\r\nDTSTART:${timeStart}\r\nDTEND:${timeEnd}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:「${location}」\r\nDESCRIPTION:${summary}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        })
       })
     })
     .flat(2)
@@ -138,7 +171,8 @@ const calenderOption = {
   holiday: holidayBody,
   festival: festivalBody,
   solarTerm: solarTermBody,
-  lunar: lunarBody
+  lunar: lunarBody,
+  trunkBranch: trunkBranchBody
 }
 
 /**
@@ -153,7 +187,7 @@ exports.calenderInit = () => {
     // prettier-ignore
     item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calenderOption[item.key](calDesc)}END:VCALENDAR`
   })
-  lunarBody()
+  trunkBranchBody()
 }
 
 /**

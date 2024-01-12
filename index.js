@@ -32,7 +32,7 @@ globalThis.calendarList = [
   { title: '中华人民共和国节日纪念日日历', key: 'festival', file: 'cal_festival.ics' },
   { title: '中华人民共和国二十四节气日历', key: 'solarTerm', file: 'cal_solarTerm.ics' },
   { title: '中华人民共和国农历、天干地支日历', key: 'lunar', file: 'cal_lunar.ics' },
-  // ,{ title: '中华人民共和国天干地支日历', key: 'stemsBranches', file: 'cal_stemsBranches.ics' },
+  { title: '中华人民共和国天干地支八字日历', key: 'trunkBranch', file: 'cal_trunkBranch.ics' }
   // ,{ title: '中华人民共和国勿忘国耻日历', key: 'nationalShame', file: 'cal_nationalShame.ics' }
 ]
 

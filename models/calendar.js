@@ -572,5 +572,7 @@ exports.lunarToSolar = Calendar.lunar2solar
 exports.getSolarTerm = Calendar.getTerm
 exports.weekText = Calendar.nStr1
 exports.solarTerms = Calendar.solarTerm
+exports.ganList = Calendar.Gan
+exports.zhiList = Calendar.Zhi
 
 exports.default = Calendar
