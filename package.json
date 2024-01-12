@@ -14,9 +14,7 @@
     "start": "生成cal.ics文件",
     "pull": "拉取github",
     "commit": "暂存",
-    "push": "推送github",
-    "push_all": "推送github、gitee",
-    "push_gitee": "推送gitee"
+    "push": "推送"
   },
   "repository": {
     "type": "git",
