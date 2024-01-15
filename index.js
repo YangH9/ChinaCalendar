@@ -3,7 +3,7 @@ const { resolve } = require('path')
 const { calenderInit, writeCalendar } = require('./models')
 const dayjs = require('dayjs')
 
-globalThis.uName = 'yangh9'
+globalThis.uName = 'YangH9'
 globalThis.nowDate = dayjs()
 globalThis.nowTime = globalThis.nowDate.format('YYYY-MM-DD')
 globalThis.nowTimeReg = /\d{4}-\d{2}-\d{2}/

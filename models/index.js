@@ -114,11 +114,12 @@ const lunarBody = (calDesc, all) => {
         const time = item.add(index, 'day')
         const { timeDate, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
         const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
-        const summary = `${lunarData.lYear}年 ${lunarData.IMonthCn} ${lunarData.IDayCn}`
+        const summary = `${lunarData.IMonthCn} ${lunarData.IDayCn} ${lunarData.lYear}年`
         const location = `${lunarData.gzYear} ${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日`
+        const description = `${lunarData.lYear}年 ${lunarData.IMonthCn} ${lunarData.IDayCn}`
         const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
-        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${summary}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
     .flat()
@@ -146,11 +147,12 @@ const trunkBranchBody = (calDesc, all) => {
           const timeT = start.second(1).format('YYYYMMDDTHHmmss')
           const timeStart = start.format('YYYYMMDDTHHmmss')
           const timeEnd = start.add(1, 'hour').endOf('hour').format('YYYYMMDDTHHmmss')
-          const summary = `${lunarData.gzYear}${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日 ${ganzhi}时`
+          const summary = `${ganzhi}时 ${lunarData.gzDay}日 ${lunarData.gzMonth}月 ${lunarData.gzYear}${lunarData.Animal}年`
           const location = `${lunarData.gzYear} ${lunarData.gzMonth} ${lunarData.gzDay} ${ganzhi}`
+          const description = `${lunarData.gzYear}${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日 ${ganzhi}时`
           const UID = `${timeT}_ganzhi_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
           // prettier-ignore
-          return `BEGIN:VEVENT\r\nDTSTART:${timeStart}\r\nDTEND:${timeEnd}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${summary}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+          return `BEGIN:VEVENT\r\nDTSTART:${timeStart}\r\nDTEND:${timeEnd}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
         })
       })
     })
