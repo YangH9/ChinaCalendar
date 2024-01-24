@@ -14,7 +14,7 @@ globalThis.filePath = resolve('data')
 // 读取生成部分数据
 let min = 0
 let max = 0
-readdirSync(globalThis.filePath).forEach((fileName) => {
+readdirSync(globalThis.filePath).forEach(fileName => {
   let num = parseInt(fileName)
   if (!isNaN(num)) {
     min = !min ? num : min < num ? min : num

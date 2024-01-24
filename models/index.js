@@ -6,7 +6,7 @@ const { solarToLunar, getSolarTerm, solarTerms, ganList, zhiList } = require('./
 
 dayjs.extend(isLeapYear)
 
-const calendarTimeCreate = (time) => {
+const calendarTimeCreate = time => {
   const itemTime = dayjs(time)
   return {
     timeDate: `VALUE=DATE:${itemTime.format('YYYYMMDD')}`,
@@ -27,9 +27,9 @@ const holidayBody = (calDesc, all) => {
   const { yearList, filePath, uName, modified } = globalThis
   return yearList
     .slice(0, -1)
-    .map((year) => {
+    .map(year => {
       const { list, govUrl } = require(join(filePath, `${year}.js`))
-      return list.map((item) => {
+      return list.map(item => {
         let hnum = 0
         let cnum = 0
         const { hsum, csum } = item.timeList.reduce(
@@ -39,7 +39,7 @@ const holidayBody = (calDesc, all) => {
           }),
           { hsum: 0, csum: 0 }
         )
-        return item.timeList.map((i) => {
+        return item.timeList.map(i => {
           const { timeDate, timeT, time09, time18 } = calendarTimeCreate(i.time)
           const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
           if (i.type === 'holiday') {
@@ -68,8 +68,8 @@ const festivalBody = (calDesc, all) => {
   const { filePath, uName, yearList, modified } = globalThis
   const { list } = require(join(filePath, 'ChineseFestival.js'))
   return yearList
-    .map((year) => {
-      return list(year).map((i) => {
+    .map(year => {
+      return list(year).map(i => {
         const { timeDate, timeT } = calendarTimeCreate(i.time)
         const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${i.summary}』\r\nDESCRIPTION:${i.description}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
@@ -87,7 +87,7 @@ const solarTermBody = (calDesc, all) => {
   let keyId = 1
   const { uName, yearList, modified } = globalThis
   return yearList
-    .map((year) => {
+    .map(year => {
       return Array.from({ length: 24 }, (_, i) => {
         const { timeDate, timeT } = calendarTimeCreate(`${year}/${~~(i / 2) + 1}/${getSolarTerm(year, i + 1)}`)
         const summary = solarTerms[i]
@@ -108,7 +108,7 @@ const lunarBody = (calDesc, all) => {
   let keyId = 1
   const { uName, yearList, modified } = globalThis
   return yearList
-    .map((i) => {
+    .map(i => {
       let item = dayjs().year(i).startOf('year')
       return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
         const time = item.add(index, 'day')
@@ -135,12 +135,12 @@ const trunkBranchBody = (calDesc, all) => {
   const { uName, yearList, modified } = globalThis
   return yearList
     .slice(-2)
-    .map((i) => {
+    .map(i => {
       let item = dayjs().year(i).startOf('year')
       return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
         const time = item.add(index, 'day')
         const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
-        const ganIndex = ganList.findIndex((i) => i === lunarData.gzDay.slice(0, 1))
+        const ganIndex = ganList.findIndex(i => i === lunarData.gzDay.slice(0, 1))
         return Array.from({ length: 12 }, (_, index) => {
           const start = time.add(index * 2 - 1, 'hour')
           const ganzhi = `${ganList[(ganIndex * 2 + index) % 10]}${zhiList[index]}`
@@ -164,7 +164,7 @@ const trunkBranchBody = (calDesc, all) => {
  * @description: 全部日历汇总
  * @returns {String} 日历数据
  */
-const allBody = (calDesc) => {
+const allBody = calDesc => {
   return `${holidayBody(calDesc, true)}${festivalBody(calDesc, true)}${solarTermBody(calDesc, true)}`
 }
 
@@ -184,7 +184,7 @@ const calenderOption = {
  */
 exports.calenderInit = () => {
   const { uName, yearList, nowTime, calendarList } = globalThis
-  calendarList.map((item) => {
+  calendarList.map(item => {
     const calDesc = `${yearList[0]}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
     // prettier-ignore
     item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calenderOption[item.key](calDesc)}END:VCALENDAR`
@@ -198,12 +198,12 @@ exports.calenderInit = () => {
 exports.writeCalendar = () => {
   const { calendarList, nowTimeReg, nowTime } = globalThis
 
-  calendarList.forEach((item) => {
+  calendarList.forEach(item => {
     writeFileSync(join(resolve('docs'), item.file), item.main)
   })
 
   const writePathList = [join(resolve('README.md')), join(resolve('docs'), 'index.html')]
-  writePathList.forEach((path) => {
+  writePathList.forEach(path => {
     const data = readFileSync(path, 'utf-8').replace(nowTimeReg, nowTime)
     writeFileSync(path, data)
   })

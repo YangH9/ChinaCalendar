@@ -25,8 +25,7 @@ exports.list = [
   },
   {
     summary: '春节',
-    description:
-      '二、春节：1月24日至30日放假调休，共7天。1月19日（星期日）、2月1日（星期六）上班。',
+    description: '二、春节：1月24日至30日放假调休，共7天。1月19日（星期日）、2月1日（星期六）上班。',
     timeList: [
       { time: '2020/01/19', name: '补班', type: 'compensateday' },
       { time: '2020/01/24', name: '假期', type: 'holiday' },
@@ -50,8 +49,7 @@ exports.list = [
   },
   {
     summary: '劳动节',
-    description:
-      '四、劳动节：5月1日至5日放假调休，共5天。4月26日（星期日）、5月9日（星期六）上班。',
+    description: '四、劳动节：5月1日至5日放假调休，共5天。4月26日（星期日）、5月9日（星期六）上班。',
     timeList: [
       { time: '2020/04/26', name: '补班', type: 'compensateday' },
       { time: '2020/05/01', name: '假期', type: 'holiday' },
@@ -74,8 +72,7 @@ exports.list = [
   },
   {
     summary: '国庆节、中秋节',
-    description:
-      '六、国庆节、中秋节：10月1日至8日放假调休，共8天。9月27日（星期日）、10月10日（星期六）上班。',
+    description: '六、国庆节、中秋节：10月1日至8日放假调休，共8天。9月27日（星期日）、10月10日（星期六）上班。',
     timeList: [
       { time: '2020/09/27', name: '补班', type: 'compensateday' },
       { time: '2020/10/01', name: '假期', type: 'holiday' },

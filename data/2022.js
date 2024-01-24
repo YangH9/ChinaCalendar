@@ -27,8 +27,7 @@ exports.list = [
   },
   {
     summary: '春节',
-    description:
-      '二、春节：1月31日至2月6日放假调休，共7天。1月29日（星期六）、1月30日（星期日）上班。',
+    description: '二、春节：1月31日至2月6日放假调休，共7天。1月29日（星期六）、1月30日（星期日）上班。',
     timeList: [
       { time: '2022/01/29', name: '补班', type: 'compensateday' },
       { time: '2022/01/30', name: '补班', type: 'compensateday' },
@@ -53,8 +52,7 @@ exports.list = [
   },
   {
     summary: '劳动节',
-    description:
-      '四、劳动节：4月30日至5月4日放假调休，共5天。4月24日（星期日）、5月7日（星期六）上班。',
+    description: '四、劳动节：4月30日至5月4日放假调休，共5天。4月24日（星期日）、5月7日（星期六）上班。',
     timeList: [
       { time: '2022/04/24', name: '补班', type: 'compensateday' },
       { time: '2022/04/30', name: '假期', type: 'holiday' },
@@ -85,8 +83,7 @@ exports.list = [
   },
   {
     summary: '国庆节',
-    description:
-      '七、国庆节：10月1日至7日放假调休，共7天。10月8日（星期六）、10月9日（星期日）上班。',
+    description: '七、国庆节：10月1日至7日放假调休，共7天。10月8日（星期六）、10月9日（星期日）上班。',
     timeList: [
       { time: '2022/10/01', name: '假期', type: 'holiday' },
       { time: '2022/10/02', name: '假期', type: 'holiday' },

@@ -165,7 +165,7 @@ const Calendar = {
    * @return Number
    * @example let count = Calendar.lYearDays(1987) ;// count=387
    */
-  lYearDays: (y) => {
+  lYearDays: y => {
     let sum = 348
     for (let i = 0x8000; i > 0x8; i >>= 1) {
       sum += Calendar.lunarInfo[y - 1900] & i ? 1 : 0
@@ -180,7 +180,7 @@ const Calendar = {
    * @example let leapMonth = Calendar.leapMonth(1987) ;// leapMonth=6
    */
   // 闰字编码 \u95f0
-  leapMonth: (y) => Calendar.lunarInfo[y - 1900] & 0xf,
+  leapMonth: y => Calendar.lunarInfo[y - 1900] & 0xf,
 
   /**
    * 返回农历y年闰月的天数 若该年没有闰月则返回0
@@ -188,7 +188,7 @@ const Calendar = {
    * @return Number (0、29、30)
    * @example let leapMonthDay = Calendar.leapDays(1987) ;// leapMonthDay=29
    */
-  leapDays: (y) => (Calendar.leapMonth(y) ? (Calendar.lunarInfo[y - 1900] & 0x10000 ? 30 : 29) : 0),
+  leapDays: y => (Calendar.leapMonth(y) ? (Calendar.lunarInfo[y - 1900] & 0x10000 ? 30 : 29) : 0),
 
   /**
    * 返回农历y年m月（非闰月）的总天数，计算m为闰月时的天数请使用leapDays方法
@@ -222,7 +222,7 @@ const Calendar = {
    * @param lYear 农历年的年份数
    * @return Cn string
    */
-  toGanZhiYear: (lYear) => {
+  toGanZhiYear: lYear => {
     let ganKey = (lYear - 3) % 10
     let zhiKey = (lYear - 3) % 12
     // 如果余数为0则为最后一个天干
@@ -255,7 +255,7 @@ const Calendar = {
    * @param offset 相对甲子的偏移量
    * @return Cn string
    */
-  toGanZhi: (offset) => Calendar.Gan[offset % 10] + Calendar.Zhi[offset % 12],
+  toGanZhi: offset => Calendar.Gan[offset % 10] + Calendar.Zhi[offset % 12],
 
   /**
    * 传入公历(!)y年获得该年第n个节气的公历日期
@@ -283,7 +283,7 @@ const Calendar = {
    * @example let cnMonth = Calendar.toChinaMonth(12) ;// cnMonth='腊月'
    */
   // 月 => \u6708
-  toChinaMonth: (m) => (m > 12 || m < 1 ? -1 : `${Calendar.nStr3[m - 1]}\u6708`),
+  toChinaMonth: m => (m > 12 || m < 1 ? -1 : `${Calendar.nStr3[m - 1]}\u6708`),
 
   /**
    * 传入农历日期数字返回汉字表示法
@@ -291,7 +291,7 @@ const Calendar = {
    * @return Cn string
    * @example let cnDay = Calendar.toChinaDay(21) ;// cnMonth='廿一'
    */
-  toChinaDay: (d) => {
+  toChinaDay: d => {
     // 日 => \u65e5
     let s
     switch (d) {
@@ -317,7 +317,7 @@ const Calendar = {
    * @return Cn string
    * @example let animal = Calendar.getAnimal(1987) ;// animal='兔'
    */
-  getAnimal: (y) => Calendar.Animals[(y - 4) % 12],
+  getAnimal: y => Calendar.Animals[(y - 4) % 12],
 
   /**
    * 传入阳历年月日获得详细的公历、农历object信息 <=> JSON

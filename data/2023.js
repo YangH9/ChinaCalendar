@@ -29,8 +29,7 @@ exports.list = [
   },
   {
     summary: '春节',
-    description:
-      '二、春节：1月21日至27日放假调休，共7天。1月28日（星期六）、1月29日（星期日）上班。',
+    description: '二、春节：1月21日至27日放假调休，共7天。1月28日（星期六）、1月29日（星期日）上班。',
     timeList: [
       { time: '2023/01/21', name: '假期', type: 'holiday' },
       { time: '2023/01/22', name: '假期', type: 'holiday' },
@@ -50,8 +49,7 @@ exports.list = [
   },
   {
     summary: '劳动节',
-    description:
-      '四、劳动节：4月29日至5月3日放假调休，共5天。4月23日（星期日）、5月6日（星期六）上班。',
+    description: '四、劳动节：4月29日至5月3日放假调休，共5天。4月23日（星期日）、5月6日（星期六）上班。',
     timeList: [
       { time: '2023/04/23', name: '补班', type: 'compensateday' },
       { time: '2023/04/29', name: '假期', type: 'holiday' },
@@ -74,8 +72,7 @@ exports.list = [
   },
   {
     summary: '中秋节、国庆节',
-    description:
-      '六、中秋节、国庆节：9月29日至10月6日放假调休，共8天。10月7日（星期六）、10月8日（星期日）上班。',
+    description: '六、中秋节、国庆节：9月29日至10月6日放假调休，共8天。10月7日（星期六）、10月8日（星期日）上班。',
     timeList: [
       { time: '2023/09/29', name: '假期', type: 'holiday' },
       { time: '2023/09/30', name: '假期', type: 'holiday' },

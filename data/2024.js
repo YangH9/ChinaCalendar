@@ -31,8 +31,7 @@ exports.list = [
   },
   {
     summary: '春节',
-    description:
-      '二、春节：2月10日至17日放假调休，共8天。2月4日（星期日）、2月18日（星期日）上班。鼓励各单位结合带薪年休假等制度落实，安排职工在除夕（2月9日）休息。',
+    description: '二、春节：2月10日至17日放假调休，共8天。2月4日（星期日）、2月18日（星期日）上班。鼓励各单位结合带薪年休假等制度落实，安排职工在除夕（2月9日）休息。',
     timeList: [
       { time: '2024/02/04', name: '补班', type: 'compensateday' },
       { time: '2024/02/10', name: '假期', type: 'holiday' },
@@ -58,8 +57,7 @@ exports.list = [
   },
   {
     summary: '劳动节',
-    description:
-      '四、劳动节：5月1日至5日放假调休，共5天。4月28日（星期日）、5月11日（星期六）上班。',
+    description: '四、劳动节：5月1日至5日放假调休，共5天。4月28日（星期日）、5月11日（星期六）上班。',
     timeList: [
       { time: '2024/04/28', name: '补班', type: 'compensateday' },
       { time: '2024/05/01', name: '假期', type: 'holiday' },
@@ -91,8 +89,7 @@ exports.list = [
   },
   {
     summary: '国庆节',
-    description:
-      '七、国庆节：10月1日至7日放假调休，共7天。9月29日（星期日）、10月12日（星期六）上班。',
+    description: '七、国庆节：10月1日至7日放假调休，共7天。9月29日（星期日）、10月12日（星期六）上班。',
     timeList: [
       { time: '2024/09/29', name: '补班', type: 'compensateday' },
       { time: '2024/10/01', name: '假期', type: 'holiday' },

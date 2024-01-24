@@ -31,8 +31,7 @@ exports.list = [
   },
   {
     summary: '春节',
-    description:
-      '二、春节：2月11日至17日放假调休，共7天。2月7日（星期日）、2月20日（星期六）上班。',
+    description: '二、春节：2月11日至17日放假调休，共7天。2月7日（星期日）、2月20日（星期六）上班。',
     timeList: [
       { time: '2021/02/07', name: '补班', type: 'compensateday' },
       { time: '2021/02/11', name: '假期', type: 'holiday' },
@@ -56,8 +55,7 @@ exports.list = [
   },
   {
     summary: '劳动节',
-    description:
-      '四、劳动节：5月1日至5日放假调休，共5天。4月25日（星期日）、5月8日（星期六）上班。',
+    description: '四、劳动节：5月1日至5日放假调休，共5天。4月25日（星期日）、5月8日（星期六）上班。',
     timeList: [
       { time: '2021/04/25', name: '补班', type: 'compensateday' },
       { time: '2021/05/01', name: '假期', type: 'holiday' },
@@ -89,8 +87,7 @@ exports.list = [
   },
   {
     summary: '国庆节',
-    description:
-      '七、国庆节：10月1日至7日放假调休，共7天。9月26日（星期日）、10月9日（星期六）上班。',
+    description: '七、国庆节：10月1日至7日放假调休，共7天。9月26日（星期日）、10月9日（星期六）上班。',
     timeList: [
       { time: '2021/09/26', name: '补班', type: 'compensateday' },
       { time: '2021/10/01', name: '假期', type: 'holiday' },

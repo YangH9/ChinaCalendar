@@ -30,7 +30,7 @@ async function giteeUpdate(username, giteePageUrl, passwd) {
   await page.goto(giteePageUrl)
   await page.waitForTimeout(1000)
   // 7.1. 监听步骤 7 中触发的确认弹框，并点击确认
-  await page.on('dialog', async (dialog) => {
+  await page.on('dialog', async dialog => {
     console.log('确认更新')
     dialog.accept()
   })

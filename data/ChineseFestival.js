@@ -36,21 +36,21 @@ const getWeekDay = (year, month, ordinal, dayOfWeek) => {
 }
 
 // 清明节日期
-const getQingMing = (year) => {
-  const leapYear = (year) => (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+const getQingMing = year => {
+  const leapYear = year => (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
   return leapYear(year) || leapYear(year - 1) ? '4' : '5'
 }
 // 秋分日期
-const getQiuFen = (year) => {
-  const leapYear = (year) => (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+const getQiuFen = year => {
+  const leapYear = year => (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
   return leapYear(year) ? '22' : '23'
 }
 
 // 除夕日期
-const getChuXi = (year) => (getLunar2Solar(year, 12, 30) === 'undefined/undefined/undefined' ? getLunar2Solar(year, 12, 29) : getLunar2Solar(year, 12, 30))
+const getChuXi = year => (getLunar2Solar(year, 12, 30) === 'undefined/undefined/undefined' ? getLunar2Solar(year, 12, 29) : getLunar2Solar(year, 12, 30))
 
 // 按年份数据生成多年的固定节日表
-exports.list = (year) =>
+exports.list = year =>
   [
     {
       title: '全体公民放假的节日',
@@ -629,4 +629,4 @@ exports.list = (year) =>
         }
       ]
     }
-  ].flatMap((i) => i.timeList)
+  ].flatMap(i => i.timeList)
