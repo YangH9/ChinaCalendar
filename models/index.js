@@ -10,6 +10,8 @@ const calendarTimeCreate = time => {
   const itemTime = dayjs(time)
   return {
     timeDate: `VALUE=DATE:${itemTime.format('YYYYMMDD')}`,
+    timeTS: `VALUE=DATE:${itemTime.format('YYYYMMDD')}`,
+    timeTE: `VALUE=DATE:${itemTime.add(1, 'day').format('YYYYMMDD')}`,
     timeT: itemTime.second(1).format('YYYYMMDDTHHmmss'),
     time09: itemTime.hour(9).format('YYYYMMDDTHHmmss'),
     time18: itemTime.hour(18).format('YYYYMMDDTHHmmss')
@@ -40,13 +42,13 @@ const holidayBody = (calDesc, all) => {
           { hsum: 0, csum: 0 }
         )
         return item.timeList.map(i => {
-          const { timeDate, timeT, time09, time18 } = calendarTimeCreate(i.time)
+          const { timeTS, timeTE, timeT, time09, time18 } = calendarTimeCreate(i.time)
           const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
           if (i.type === 'holiday') {
             hnum++
             // 法定休假日
             // prettier-ignore
-            return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+            return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
           }
           cnum++
           // 法定补班日
@@ -70,9 +72,9 @@ const festivalBody = (calDesc, all) => {
   return yearList
     .map(year => {
       return list(year).map(i => {
-        const { timeDate, timeT } = calendarTimeCreate(i.time)
+        const { timeTS, timeTE, timeT } = calendarTimeCreate(i.time)
         const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${i.summary}』\r\nDESCRIPTION:${i.description}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${i.summary}』\r\nDESCRIPTION:${i.description}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
     .flat()
@@ -89,11 +91,11 @@ const solarTermBody = (calDesc, all) => {
   return yearList
     .map(year => {
       return Array.from({ length: 24 }, (_, i) => {
-        const { timeDate, timeT } = calendarTimeCreate(`${year}/${~~(i / 2) + 1}/${getSolarTerm(year, i + 1)}`)
+        const { timeTS, timeTE, timeT } = calendarTimeCreate(`${year}/${~~(i / 2) + 1}/${getSolarTerm(year, i + 1)}`)
         const summary = solarTerms[i]
         const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
-        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nDESCRIPTION:${summary}，${year}年第${i + 1}个节气\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nDESCRIPTION:${summary}，${year}年第${i + 1}个节气\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
     .flat()
@@ -112,7 +114,7 @@ const lunarBody = (calDesc, all) => {
       let item = dayjs().year(i).startOf('year')
       return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
         const time = item.add(index, 'day')
-        const { timeDate, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
+        const { timeTS, timeTE, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
         const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
         const summary = `${lunarData.IMonthCn} ${lunarData.IDayCn} ${lunarData.lYear}年`
         const location = `${lunarData.gzYear} ${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日`
@@ -120,7 +122,7 @@ const lunarBody = (calDesc, all) => {
         const solarDate = time.format('日期：YYYY年MM月DD日')
         const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
-        return `BEGIN:VEVENT\r\nDTSTART;${timeDate}\r\nDTEND;${timeDate}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
       })
     })
     .flat()
