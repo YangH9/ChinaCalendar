@@ -318,9 +318,15 @@ exports.list = year =>
           type: 'festival'
         },
         {
+          time: `${year}/4/1`,
+          summary: '81192，请返航。',
+          description: `王伟烈士牺牲${year - 2001}周年。\\n呼叫81192！请返航，请回家！`,
+          type: 'festival'
+        },
+        {
           time: `${year}/4/4`,
-          summary: '全国性哀悼日',
-          description: '全国性哀悼日（4月4日[2020年起]），全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼',
+          summary: '全国性哀悼活动',
+          description: '为表达全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼，国务院决定，2020年4月4日举行全国性哀悼活动。\\n2019年12月中旬首例',
           type: 'festival'
         },
         {
