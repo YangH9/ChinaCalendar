@@ -337,6 +337,13 @@ exports.list = year =>
           type: 'festival'
         },
         {
+          time: `${year}/4/23`,
+          summary: `中国人民海军成立${year - 1949}周年纪念日`,
+          description:
+            "人民海军，生日快乐！\\n中国人民解放军海军（英文：People's Liberation Army Navy，缩写：PLAN或PLA Navy，舰艇前缀：CNS-Chinese Naval Ship 或PLANS-PLA Navy Ship），是中华人民共和国的海上武装力量，中国人民解放军的海上军种。中国人民解放军海军以舰艇部队和海军航空兵为主体，其主要任务是独立或协同陆军、空军防御敌人从海上的入侵，保卫领海主权，维护海洋权益。其作战部队——除了海军总部直辖外，分布于北海、东海、南海三支舰队中。海军是海上作战的主力，具有在水面、水下、空中作战的能力。",
+          type: 'festival'
+        },
+        {
           time: `${year}/4/24`,
           summary: '中国航天日',
           description:
