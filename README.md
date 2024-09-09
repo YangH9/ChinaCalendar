@@ -6,47 +6,43 @@
 
 [使用方式](#订阅方式)
 
+> 由于GiteePages无法使用，暂时只有GithubPages站点，首次订阅可能时间较长
+
 ### 完整版
 
 > 包含所有类型日历（暂时除农历、天干地支），一次全部订阅，体积较大
 
-* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics](https://yangh9.gitee.io/ChinaHolidayCalender/calender.ics)
-* 备用：[https://yangh9.github.io/ChinaHolidayCalender/calender.ics](https://yangh9.github.io/ChinaHolidayCalender/calender.ics)
+* 订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/calender.ics](https://yangh9.github.io/ChinaHolidayCalender/calender.ics)
 
 ### 法定节假日
 
 > 打工人放假日历，国务院发布的放假补班通知，含休假补班日
 
-* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_holiday.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_holiday.ics)
-* 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics)
+* 订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_holiday.ics)
 
 ### 节日纪念日
 
 > 中国传统节日部分流行节日纪念日日历
 
-* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_festival.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_festival.ics)
-* 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics)
+* 订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_festival.ics)
 
 ### 二十四节气
 
 > 中国二十四节气日历
 
-* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_solarTerm.ics)
-* 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics)
+* 订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_solarTerm.ics)
 
 ### 农历、天干地支
 
 > 中国农历、天干地支日历
 
-* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_lunar.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_lunar.ics)
-* 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_lunar.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_lunar.ics)
+* 订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_lunar.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_lunar.ics)
 
 ### 天干地支、生辰八字
 
 > 中国天干地支、生辰八字日历
 
-* 订阅链接：[https://yangh9.gitee.io/ChinaHolidayCalender/cal_trunkBranch.ics](https://yangh9.gitee.io/ChinaHolidayCalender/cal_trunkBranch.ics)
-* 备用：[https://yangh9.github.io/ChinaHolidayCalender/cal_trunkBranch.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_trunkBranch.ics)
+* 订阅链接：[https://yangh9.github.io/ChinaHolidayCalender/cal_trunkBranch.ics](https://yangh9.github.io/ChinaHolidayCalender/cal_trunkBranch.ics)
 
 ## 订阅方式
 
