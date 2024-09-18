@@ -1,5 +1,5 @@
 {
-  "name": "china-holiday-calender",
+  "name": "china-calendar",
   "description": "中华人民共和国节日、纪念日、假日调休、二十四节气、天干地支农历日历",
   "version": "1.0.0",
   "main": "index.js",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YangH9/ChinaHolidayCalender"
+    "url": "https://github.com/YangH9/ChinaCalendar"
   },
   "keywords": [
     "中国节假日",
@@ -40,6 +40,6 @@
     "puppeteer": "^21.3.8"
   },
   "directories": {
-    "doc": "doc"
+    "doc": "docs"
   }
 }

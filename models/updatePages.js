@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 
 const username = '' // gitee用户名
 const password = '' // gitee密码
-const giteePageUrl = 'https://gitee.com/YangH9/ChinaHolidayCalender/pages' // gitee page地址
+const giteePageUrl = 'https://gitee.com/YangH9/ChinaCalendar/pages' // gitee page地址
 
 async function giteeUpdate(username, giteePageUrl, passwd) {
   const browser = await puppeteer.launch({

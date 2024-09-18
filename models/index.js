@@ -102,6 +102,47 @@ const solarTermBody = (calDesc, all) => {
     .join('')
 }
 
+// 黄道吉日 auspiciousday
+// https://lunisolar.js.org/
+const auspiciousDay = (calDesc, all) => {
+  let keyId = 1
+  const { uName, yearList, modified } = globalThis
+  return [yearList[0]]
+    .map(i => {
+      let item = dayjs().year(i).startOf('year')
+      return Array.from({ length: 12 + item.isLeapYear() }, (_, index) => {
+        const time = item.add(index, 'day')
+        const { timeTS, timeTE, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
+        const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
+        const summary = `${lunarData.IMonthCn} ${lunarData.IDayCn} ${lunarData.lYear}年`
+        const location = `${lunarData.gzYear} ${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日`
+        const description = `${lunarData.lYear}年 ${lunarData.IMonthCn} ${lunarData.IDayCn}`
+        const solarDate = time.format('日期：YYYY年MM月DD日')
+        const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+        console.log(lunarData)
+        // 子日青龙，丑日明堂
+        // 寅日天刑，卯日朱雀
+        // 辰日金匮，巳日天德
+        // 午日白虎，未日玉堂
+        // 申日天牢，酉日玄武
+        // 戌日司命，亥日勾陈
+
+        // 青龙，天德，玉堂，司命，明堂，金匮      黄道吉日
+
+// 农历 八月初七
+// 甲辰 [龙] 年
+// 癸酉月 丙子日
+// 宜：沐浴 入殓 移柩 除服 成服 破土 平治道涂
+// 忌：嫁娶 移徙 入宅 开市
+
+        // prettier-ignore
+        // return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+      })
+    })
+    .flat()
+    .join('')
+}
+
 /**
  * @description: 农历
  * @returns {String} 日历数据
@@ -171,7 +212,7 @@ const allBody = calDesc => {
   return `${holidayBody(calDesc, true)}${festivalBody(calDesc, true)}${solarTermBody(calDesc, true)}`
 }
 
-const calenderOption = {
+const calendarOption = {
   all: allBody,
   holiday: holidayBody,
   festival: festivalBody,
@@ -185,14 +226,14 @@ const calenderOption = {
  * @param {}
  * @returns {Object}
  */
-exports.calenderInit = () => {
+exports.calendarInit = () => {
   const { uName, yearList, nowTime, calendarList } = globalThis
   calendarList.map(item => {
     const calDesc = `${yearList[0]}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
     // prettier-ignore
-    item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Public Holidays//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calenderOption[item.key](calDesc)}END:VCALENDAR`
+    item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Calendar//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calendarOption[item.key](calDesc)}END:VCALENDAR`
   })
-  trunkBranchBody()
+  auspiciousDay()
 }
 
 /**
