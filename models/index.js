@@ -48,12 +48,12 @@ const holidayBody = (calDesc, all) => {
             hnum++
             // 法定休假日
             // prettier-ignore
-            return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+            return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
           }
           cnum++
           // 法定补班日
           // prettier-ignore
-          return `BEGIN:VEVENT\r\nDTSTART:${time09}\r\nDTEND:${time18}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:「${item.summary} ${i.name}」 第${cnum}天/共${csum}天\r\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:TENTATIVE\r\nTRANSP:OPAQUE\r\nSEQUENCE:1\r\nBEGIN:VALARM\r\nTRIGGER:-PT60M\r\nACTION:DISPLAY\r\nEND:VALARM\r\nEND:VEVENT\r\n`
+          return `BEGIN:VEVENT\nDTSTART:${time09}\nDTEND:${time18}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:「${item.summary} ${i.name}」 第${cnum}天/共${csum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:TENTATIVE\nTRANSP:OPAQUE\nSEQUENCE:1\nBEGIN:VALARM\nTRIGGER:-PT60M\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\n`
         })
       })
     })
@@ -74,7 +74,7 @@ const festivalBody = (calDesc, all) => {
       return list(year).map(i => {
         const { timeTS, timeTE, timeT } = calendarTimeCreate(i.time)
         const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-        return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${i.summary}』\r\nDESCRIPTION:${i.description}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:『${i.summary}』\nDESCRIPTION:${i.description}\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
       })
     })
     .flat()
@@ -95,7 +95,7 @@ const solarTermBody = (calDesc, all) => {
         const summary = solarTerms[i]
         const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
-        return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nDESCRIPTION:${summary}，${year}年第${i + 1}个节气\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:『${summary}』\nDESCRIPTION:${summary}，${year}年第${i + 1}个节气\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
       })
     })
     .flat()
@@ -136,7 +136,7 @@ const auspiciousDay = (calDesc, all) => {
 // 忌：嫁娶 移徙 入宅 开市
 
         // prettier-ignore
-        // return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        // return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
       })
     })
     .flat()
@@ -163,7 +163,7 @@ const lunarBody = (calDesc, all) => {
         const solarDate = time.format('日期：YYYY年MM月DD日')
         const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
-        return `BEGIN:VEVENT\r\nDTSTART;${timeTS}\r\nDTEND;${timeTE}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+        return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
       })
     })
     .flat()
@@ -196,7 +196,7 @@ const trunkBranchBody = (calDesc, all) => {
           const description = `${lunarData.gzYear}${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日 ${ganzhi}时`
           const UID = `${timeT}_ganzhi_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
           // prettier-ignore
-          return `BEGIN:VEVENT\r\nDTSTART:${timeStart}\r\nDTEND:${timeEnd}\r\nDTSTAMP:${timeT}\r\nUID:${UID}\r\nCREATED:${timeT}\r\nSUMMARY:『${summary}』\r\nLOCATION:${location}\r\nDESCRIPTION:${description}\\n${location}\\n\\n${calDesc}\r\nLAST-MODIFIED:${modified}\r\nSTATUS:CONFIRMED\r\nTRANSP:TRANSPARENT\r\nSEQUENCE:1\r\nEND:VEVENT\r\n`
+          return `BEGIN:VEVENT\nDTSTART:${timeStart}\nDTEND:${timeEnd}\nDTSTAMP:${timeT}\nUID:${UID}\nCREATED:${timeT}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n\\n${calDesc}\nLAST-MODIFIED:${modified}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
         })
       })
     })
@@ -231,7 +231,7 @@ exports.calendarInit = () => {
   calendarList.map(item => {
     const calDesc = `${yearList[0]}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
     // prettier-ignore
-    item.main = `BEGIN:VCALENDAR\r\nPRODID:-//${uName}//China Calendar//CN\r\nVERSION:2.0\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:${item.title}\r\nX-WR-TIMEZONE:Asia/Shanghai\r\nX-WR-CALDESC:${calDesc}\r\nBEGIN:VTIMEZONE\r\nTZID:Asia/Shanghai\r\nX-LIC-LOCATION:Asia/Shanghai\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0800\r\nTZOFFSETTO:+0800\r\nTZNAME:CST\r\nDTSTART:19700101T000000\r\nEND:STANDARD\r\nEND:VTIMEZONE\r\n${calendarOption[item.key](calDesc)}END:VCALENDAR`
+    item.main = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](calDesc)}END:VCALENDAR`
   })
   auspiciousDay()
 }
