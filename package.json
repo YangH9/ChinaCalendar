@@ -8,7 +8,7 @@
     "pull": "git pull & cd branch-pages & git pull",
     "commit": "git add . & git commit -m [update]自动提交",
     "push": "git push",
-    "push:dist": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
+    "push:branch-pages": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
