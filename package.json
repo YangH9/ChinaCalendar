@@ -8,10 +8,9 @@
     "pull": "git pull & npm run submodule:pull",
     "commit": "git add . & git commit -m [update]自动提交",
     "push": "git push",
-    "push:branch-pages": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
-    "submodule:init": "git submodule update --init --recursive",
+    "submodule:init": "git submodule update --init --recursive & cd branch-pages & git checkout pages",
     "submodule:pull": "cd branch-pages & git pull origin pages",
-    "submodule:push": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
+    "submodule:push": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push origin pages",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
