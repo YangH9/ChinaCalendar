@@ -246,7 +246,7 @@ exports.writeCalendar = () => {
     writeFileSync(join(resolve('branch-pages'), item.file), item.main)
   })
 
-  const writePathList = [join(resolve('README.md')), join(resolve('branch-pages'), 'index.html')]
+  const writePathList = [join(resolve('README.md')), join(resolve('branch-pages'), 'README.md'), join(resolve('branch-pages'), 'index.html')]
   writePathList.forEach(path => {
     const data = readFileSync(path, 'utf-8').replace(nowTimeReg, nowTime)
     writeFileSync(path, data)
