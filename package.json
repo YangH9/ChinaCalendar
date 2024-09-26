@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "pull": "git pull & cd branch-pages & git pull",
+    "pull": "git pull & npm run submodule:pull",
     "commit": "git add . & git commit -m [update]自动提交",
     "push": "git push",
     "push:branch-pages": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
+    "submodule:init": "git submodule update --init --recursive",
+    "submodule:pull": "cd branch-pages & git pull origin pages",
+    "submodule:push": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
