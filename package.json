@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "pull": "git pull & cd dist & git pull",
+    "pull": "git pull & cd branch-pages & git pull",
     "commit": "git add . & git commit -m [update]自动提交",
     "push": "git push",
-    "push:dist": "cd dist & git add . & git commit -m [update]dist & git push",
+    "push:dist": "cd branch-pages & git add . & git commit -m [update]branch-pages & git push",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
@@ -39,8 +39,5 @@
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "puppeteer": "^21.3.8"
-  },
-  "directories": {
-    "doc": "docs"
   }
 }

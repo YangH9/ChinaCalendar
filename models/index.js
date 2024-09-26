@@ -243,10 +243,10 @@ exports.writeCalendar = () => {
   const { calendarList, nowTimeReg, nowTime } = globalThis
 
   calendarList.forEach(item => {
-    writeFileSync(join(resolve('docs'), item.file), item.main)
+    writeFileSync(join(resolve('branch-pages'), item.file), item.main)
   })
 
-  const writePathList = [join(resolve('README.md')), join(resolve('docs'), 'index.html')]
+  const writePathList = [join(resolve('README.md')), join(resolve('branch-pages'), 'index.html')]
   writePathList.forEach(path => {
     const data = readFileSync(path, 'utf-8').replace(nowTimeReg, nowTime)
     writeFileSync(path, data)
