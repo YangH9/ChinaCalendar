@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "pull": "git pull origin master",
+    "pull": "git pull & cd dist & git pull origin master",
     "commit": "git add . & git commit -m [update]自动提交",
-    "push": "git push origin master",
+    "push": "git push",
+    "push:dist": "cd dist & git add . & git commit -m [update]dist & git push",
     "update_pages": "node models/updatePages"
   },
   "scripts-info": {
