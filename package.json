@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "pull": "git pull & cd dist & git pull origin master",
+    "pull": "git pull & cd dist & git pull",
     "commit": "git add . & git commit -m [update]自动提交",
     "push": "git push",
     "push:dist": "cd dist & git add . & git commit -m [update]dist & git push",
