@@ -1,4 +1,4 @@
-# ChinaCalendar
+# ChinaCalendar branch pages
 
 ## 中华人民共和国节日、纪念日、法定节假日调休补班、二十四节气、天干地支农历日历
 
@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> 更新时间：2024-09-25
+> 更新时间：2024-09-26
 
 [使用方式](#订阅方式)
 
@@ -74,6 +74,6 @@
 
 仓库地址：[https://github.com/YangH9/ChinaCalendar](https://github.com/YangH9/ChinaCalendar)
 
-[ics 文件文档](./docs/iCalendar.md)
+[ics 文件文档](./iCalendar.md)
 
-[ics 文件官方文档](./docs/iCalendar.txt)
+[ics 文件官方文档](./iCalendar.txt)
