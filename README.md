@@ -74,6 +74,6 @@
 
 仓库地址：[https://github.com/YangH9/ChinaCalendar](https://github.com/YangH9/ChinaCalendar)
 
-[ics 文件文档](./docs/iCalendar.md)
+[ics 文件文档](https://github.com/YangH9/ChinaCalendar/tree/pages/iCalendar.md)
 
-[ics 文件官方文档](./docs/iCalendar.txt)
+[ics 文件官方文档](https://github.com/YangH9/ChinaCalendar/tree/pages/iCalendar.txt)
