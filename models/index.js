@@ -119,7 +119,7 @@ const auspiciousDay = (calDesc, all) => {
         const description = `${lunarData.lYear}年 ${lunarData.IMonthCn} ${lunarData.IDayCn}`
         const solarDate = time.format('日期：YYYY年MM月DD日')
         const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-        console.log(lunarData)
+        // console.log(lunarData)
         // 子日青龙，丑日明堂
         // 寅日天刑，卯日朱雀
         // 辰日金匮，巳日天德
@@ -129,11 +129,11 @@ const auspiciousDay = (calDesc, all) => {
 
         // 青龙，天德，玉堂，司命，明堂，金匮      黄道吉日
 
-// 农历 八月初七
-// 甲辰 [龙] 年
-// 癸酉月 丙子日
-// 宜：沐浴 入殓 移柩 除服 成服 破土 平治道涂
-// 忌：嫁娶 移徙 入宅 开市
+        // 农历 八月初七
+        // 甲辰 [龙] 年
+        // 癸酉月 丙子日
+        // 宜：沐浴 入殓 移柩 除服 成服 破土 平治道涂
+        // 忌：嫁娶 移徙 入宅 开市
 
         // prettier-ignore
         // return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
