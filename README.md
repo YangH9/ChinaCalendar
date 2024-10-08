@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> 更新时间：2024-10-01
+> 更新时间：2024-10-08
 
 [使用方式](#订阅方式)
 
@@ -50,6 +50,10 @@
 > 中国天干地支、生辰八字日历
 
 - 订阅链接：[https://yangh9.github.io/ChinaCalendar/cal_trunkBranch.ics](https://yangh9.github.io/ChinaCalendar/cal_trunkBranch.ics)
+
+## 优化日历订阅
+
+> 部分日历类型减小订阅体积，历史订阅数据单独存放，默认订阅时间范围修改
 
 ## 订阅方式
 

@@ -24,40 +24,42 @@ let AllKeyId = 1
  * @description: 法定节假日
  * @returns {String} 日历数据
  */
-const holidayBody = (calDesc, all) => {
+const holidayBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { yearList, filePath, uName, modified } = globalThis
+  const { filePath, uName, modified } = globalThis
   return yearList
-    .slice(0, -1)
     .map(year => {
       const { list, govUrl } = require(join(filePath, `${year}.js`))
-      return list.map(item => {
-        let hnum = 0
-        let cnum = 0
-        const { hsum, csum } = item.timeList.reduce(
-          (total, item) => ({
-            hsum: total.hsum + (item.type === 'holiday'),
-            csum: total.csum + (item.type === 'compensateday')
-          }),
-          { hsum: 0, csum: 0 }
-        )
-        return item.timeList.map(i => {
-          const { timeTS, timeTE, timeT, time09, time18 } = calendarTimeCreate(i.time)
-          const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-          if (i.type === 'holiday') {
-            hnum++
-            // 法定休假日
-            // prettier-ignore
-            return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-          }
-          cnum++
-          // 法定补班日
-          // prettier-ignore
-          return `BEGIN:VEVENT\nDTSTART:${time09}\nDTEND:${time18}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:「${item.summary} ${i.name}」 第${cnum}天/共${csum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nSTATUS:TENTATIVE\nTRANSP:OPAQUE\nSEQUENCE:1\nBEGIN:VALARM\nTRIGGER:-PT60M\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\n`
+      return list
+        .map(item => {
+          let hnum = 0
+          let cnum = 0
+          const { hsum, csum } = item.timeList.reduce(
+            (total, item) => ({
+              hsum: total.hsum + (item.type === 'holiday'),
+              csum: total.csum + (item.type === 'compensateday')
+            }),
+            { hsum: 0, csum: 0 }
+          )
+          return item.timeList
+            .map(i => {
+              const { timeTS, timeTE, timeT, time09, time18 } = calendarTimeCreate(i.time)
+              const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+              if (i.type === 'holiday') {
+                hnum++
+                // 法定休假日
+                // prettier-ignore
+                return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:「${item.summary} ${i.name}」 第${hnum}天/共${hsum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+              }
+              cnum++
+              // 法定补班日
+              // prettier-ignore
+              return `BEGIN:VEVENT\nDTSTART:${time09}\nDTEND:${time18}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:「${item.summary} ${i.name}」 第${cnum}天/共${csum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nSTATUS:TENTATIVE\nTRANSP:OPAQUE\nSEQUENCE:1\nBEGIN:VALARM\nTRIGGER:-PT60M\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\n`
+            })
+            .join('')
         })
-      })
+        .join('')
     })
-    .flat(2)
     .join('')
 }
 
@@ -65,19 +67,20 @@ const holidayBody = (calDesc, all) => {
  * @description: 节日
  * @returns {String} 日历数据
  */
-const festivalBody = (calDesc, all) => {
+const festivalBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { filePath, uName, yearList, modified } = globalThis
+  const { filePath, uName, modified } = globalThis
   const { list } = require(join(filePath, 'ChineseFestival.js'))
   return yearList
     .map(year => {
-      return list(year).map(i => {
-        const { timeTS, timeTE, timeT } = calendarTimeCreate(i.time)
-        const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-        return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${i.summary}』\nDESCRIPTION:${i.description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-      })
+      return list(year)
+        .map(i => {
+          const { timeTS, timeTE, timeT } = calendarTimeCreate(i.time)
+          const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+          return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${i.summary}』\nDESCRIPTION:${i.description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+        })
+        .join('')
     })
-    .flat()
     .join('')
 }
 
@@ -85,9 +88,9 @@ const festivalBody = (calDesc, all) => {
  * @description: 二十四节气
  * @returns {String} 日历数据
  */
-const solarTermBody = (calDesc, all) => {
+const solarTermBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { uName, yearList, modified } = globalThis
+  const { uName, modified } = globalThis
   return yearList
     .map(year => {
       return Array.from({ length: 24 }, (_, i) => {
@@ -96,17 +99,16 @@ const solarTermBody = (calDesc, all) => {
         const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
         return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nDESCRIPTION:${summary}，${year}年第${i + 1}个节气\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-      })
+      }).join('')
     })
-    .flat()
     .join('')
 }
 
 // 黄道吉日 auspiciousday
 // https://lunisolar.js.org/
-const auspiciousDay = (calDesc, all) => {
+const auspiciousDay = (yearList, calDesc, all) => {
   let keyId = 1
-  const { uName, yearList, modified } = globalThis
+  const { uName, modified } = globalThis
   return [yearList[0]]
     .map(i => {
       let item = dayjs().year(i).startOf('year')
@@ -147,12 +149,12 @@ const auspiciousDay = (calDesc, all) => {
  * @description: 农历
  * @returns {String} 日历数据
  */
-const lunarBody = (calDesc, all) => {
+const lunarBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { uName, yearList, modified } = globalThis
+  const { nowDate, uName, modified } = globalThis
   return yearList
-    .map(i => {
-      let item = dayjs().year(i).startOf('year')
+    .map(year => {
+      let item = dayjs().year(year).startOf('year')
       return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
         const time = item.add(index, 'day')
         const { timeTS, timeTE, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
@@ -164,9 +166,8 @@ const lunarBody = (calDesc, all) => {
         const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
         // prettier-ignore
         return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-      })
+      }).join('')
     })
-    .flat()
     .join('')
 }
 
@@ -174,13 +175,12 @@ const lunarBody = (calDesc, all) => {
  * @description: 天干地支、生辰八字
  * @returns {String} 日历数据
  */
-const trunkBranchBody = (calDesc, all) => {
+const trunkBranchBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { uName, yearList, modified } = globalThis
+  const { uName, modified } = globalThis
   return yearList
-    .slice(-2)
-    .map(i => {
-      let item = dayjs().year(i).startOf('year')
+    .map(year => {
+      let item = dayjs().year(year).startOf('year')
       return Array.from({ length: 365 + item.isLeapYear() }, (_, index) => {
         const time = item.add(index, 'day')
         const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
@@ -197,10 +197,9 @@ const trunkBranchBody = (calDesc, all) => {
           const UID = `${timeT}_ganzhi_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
           // prettier-ignore
           return `BEGIN:VEVENT\nDTSTART:${timeStart}\nDTEND:${timeEnd}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-        })
-      })
+        }).join('')
+      }).join('')
     })
-    .flat(2)
     .join('')
 }
 
@@ -208,8 +207,8 @@ const trunkBranchBody = (calDesc, all) => {
  * @description: 全部日历汇总
  * @returns {String} 日历数据
  */
-const allBody = calDesc => {
-  return `${holidayBody(calDesc, true)}${festivalBody(calDesc, true)}${solarTermBody(calDesc, true)}`
+const allBody = (year, calDesc) => {
+  return `${holidayBody(year, calDesc, true)}${festivalBody(year, calDesc, true)}${solarTermBody(year, calDesc, true)}`
 }
 
 const calendarOption = {
@@ -229,11 +228,11 @@ const calendarOption = {
 exports.calendarInit = () => {
   const { uName, yearList, nowTime, calendarList } = globalThis
   calendarList.map(item => {
-    const calDesc = `${yearList[0]}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
+    const calDesc = `${yearList.at(-2)}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
     // prettier-ignore
-    item.main = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](calDesc)}END:VCALENDAR`
+    item.main = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](yearList.slice(-2), calDesc)}END:VCALENDAR`
   })
-  auspiciousDay()
+  // auspiciousDay()
 }
 
 /**

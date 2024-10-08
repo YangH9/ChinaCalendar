@@ -22,7 +22,6 @@ readdirSync(globalThis.filePath).forEach(fileName => {
     globalThis.yearList.push(num)
   }
 })
-globalThis.yearList.push(globalThis.yearList.at(-1) + 1)
 
 globalThis.calendarList = [
   { title: '中华人民共和国节日、纪念日、法定节假日调休补班、二十四节气、农历天干地支日历', key: 'all', file: 'calendar.ics' },
