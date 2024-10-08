@@ -1,4 +1,8 @@
-[submodule "branch-pages"]
-	path = branch-pages
+[submodule "submodule-branch-pages"]
+	path = submodule-branch-pages
 	url = https://github.com/YangH9/ChinaCalendar.git
 	branch = pages
+[submodule "submodule-store-calendar"]
+	path = submodule-store-calendar
+	url = https://github.com/YangH9/calendar.git
+	branch = master
