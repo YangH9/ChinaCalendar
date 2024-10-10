@@ -225,27 +225,19 @@ const calendarOption = {
  * @param {}
  * @returns {Object}
  */
-exports.calendarInit = () => {
-  const { uName, yearList, nowTime, calendarList } = globalThis
+exports.calendarGenerate = () => {
+  const { uName, yearList, nowTime, nowTimeReg, calendarPath, calendarList } = globalThis
+  // 正常订阅日历，两年时间范围
   calendarList.map(item => {
     const calDesc = `${yearList.at(-2)}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
     // prettier-ignore
-    item.main = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](yearList.slice(-2), calDesc)}END:VCALENDAR`
+    const calText = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](yearList.slice(-2), calDesc)}END:VCALENDAR`
+    writeFileSync(join(calendarPath, item.file), calText)
   })
+  // 历史年份日历
+
   // auspiciousDay()
-}
-
-/**
- * @description: 写入日历文件
- */
-exports.writeCalendar = () => {
-  const { calendarList, nowTimeReg, nowTime } = globalThis
-
-  calendarList.forEach(item => {
-    writeFileSync(join(resolve('submodule-branch-pages'), item.file), item.main)
-  })
-
-  const writePathList = [join(resolve('README.md')), join(resolve('submodule-branch-pages'), 'README.md'), join(resolve('submodule-branch-pages'), 'index.html')]
+  const writePathList = [join(resolve('README.md')), join(calendarPath, 'README.md'), join(calendarPath, 'index.html')]
   writePathList.forEach(path => {
     const data = readFileSync(path, 'utf-8').replace(nowTimeReg, nowTime)
     writeFileSync(path, data)

@@ -11,7 +11,7 @@
     "push": "git push",
     "submodule:init": "git submodule update --init --recursive --force & cd submodule-branch-pages & git checkout pages & cd ../submodule-store-calendar & git checkout master",
     "submodule:pull": "cd submodule-branch-pages & git pull origin pages & cd ../submodule-store-calendar & git pull origin master",
-    "submodule:push": "cd submodule-branch-pages & git add . & git commit -m [update]submodule-branch-pages & git push origin pages & git pull origin pages & cd ../submodule-store-calendar & git add . & git commit -m [update]submodule-store-calendar & git push origin master & git pull origin master"
+    "submodule:push": "cd submodule-branch-pages & git add . & git commit -m [update]submodule-branch-pages & git push origin pages & cd ../submodule-store-calendar & git add . & git commit -m [update]submodule-store-calendar & git push origin master"
   },
   "scripts-info": {
     "init": "初始化项目",

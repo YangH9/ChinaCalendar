@@ -1,6 +1,6 @@
 const { readdirSync } = require('fs')
 const { resolve } = require('path')
-const { calendarInit, writeCalendar } = require('./models')
+const { calendarGenerate } = require('./models')
 const dayjs = require('dayjs')
 
 globalThis.uName = 'YangH9'
@@ -10,6 +10,7 @@ globalThis.nowTimeReg = /\d{4}-\d{2}-\d{2}/
 globalThis.modified = globalThis.nowDate.format('YYYYMMDDTHHmmss')
 globalThis.yearList = []
 globalThis.filePath = resolve('data')
+globalThis.calendarPath = resolve('submodule-branch-pages')
 
 // 读取生成部分数据
 let min = 0
@@ -32,5 +33,4 @@ globalThis.calendarList = [
   { title: '中华人民共和国天干地支、生辰八字日历', key: 'trunkBranch', file: 'cal_trunkBranch.ics' }
 ]
 
-calendarInit()
-writeCalendar()
+calendarGenerate()
