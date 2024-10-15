@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> 更新时间：2024-10-14
+> <!-- [update time start] -->更新时间：2024-10-14<!-- [update time end] -->
 
 [使用方式](#订阅方式)
 
@@ -54,6 +54,8 @@
 ## 优化日历订阅
 
 > 部分日历类型减小订阅体积，历史订阅数据单独存放，默认订阅时间范围修改
+
+[历史日历订阅](https://yangh9.github.io/calendar/)
 
 ## 订阅方式
 

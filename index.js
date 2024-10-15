@@ -6,16 +6,16 @@ const dayjs = require('dayjs')
 globalThis.uName = 'YangH9'
 globalThis.nowDate = dayjs()
 globalThis.nowTime = globalThis.nowDate.format('YYYY-MM-DD')
-globalThis.nowTimeReg = /\d{4}-\d{2}-\d{2}/
 globalThis.modified = globalThis.nowDate.format('YYYYMMDDTHHmmss')
 globalThis.yearList = []
-globalThis.filePath = resolve('data')
+globalThis.dataPath = resolve('data')
 globalThis.calendarPath = resolve('submodule-branch-pages')
+globalThis.historyPath = resolve('submodule-store-calendar')
 
 // 读取生成部分数据
 let min = 0
 let max = 0
-readdirSync(globalThis.filePath).forEach(fileName => {
+readdirSync(globalThis.dataPath).forEach(fileName => {
   let num = parseInt(fileName)
   if (!isNaN(num)) {
     min = !min ? num : min < num ? min : num

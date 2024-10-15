@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 const isLeapYear = require('dayjs/plugin/isLeapYear')
-const { writeFileSync, readFileSync } = require('fs')
+const { writeFileSync, readFileSync, existsSync, mkdirSync } = require('fs')
 const { join, resolve } = require('path')
 const { solarToLunar, getSolarTerm, solarTerms, ganList, zhiList } = require('./calendar')
 
@@ -26,10 +26,10 @@ let AllKeyId = 1
  */
 const holidayBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { filePath, uName, modified } = globalThis
+  const { dataPath, uName, modified } = globalThis
   return yearList
     .map(year => {
-      const { list, govUrl } = require(join(filePath, `${year}.js`))
+      const { list, govUrl } = require(join(dataPath, `${year}.js`))
       return list
         .map(item => {
           let hnum = 0
@@ -69,8 +69,8 @@ const holidayBody = (yearList, calDesc, all) => {
  */
 const festivalBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { filePath, uName, modified } = globalThis
-  const { list } = require(join(filePath, 'ChineseFestival.js'))
+  const { dataPath, uName, modified } = globalThis
+  const { list } = require(join(dataPath, 'ChineseFestival.js'))
   return yearList
     .map(year => {
       return list(year)
@@ -226,20 +226,59 @@ const calendarOption = {
  * @returns {Object}
  */
 exports.calendarGenerate = () => {
-  const { uName, yearList, nowTime, nowTimeReg, calendarPath, calendarList } = globalThis
+  const { uName, yearList, nowTime, calendarPath, historyPath, calendarList } = globalThis
   // 正常订阅日历，两年时间范围
-  calendarList.map(item => {
-    const calDesc = `${yearList.at(-2)}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
-    // prettier-ignore
-    const calText = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](yearList.slice(-2), calDesc)}END:VCALENDAR`
-    writeFileSync(join(calendarPath, item.file), calText)
-  })
-  // 历史年份日历
+  ;(() => {
+    calendarList.forEach(item => {
+      const calDesc = `${yearList.at(-2)}~${yearList.at(-1)}年${item.title}。更新时间：${nowTime}`
+      // prettier-ignore
+      const calText = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key](yearList.slice(-2), calDesc)}END:VCALENDAR`
+      writeFileSync(join(calendarPath, item.file), calText)
+    })
+  })()
 
+  // 历史年份日历
+  ;(() => {
+    calendarList
+      .filter(i => i.key !== 'all')
+      .forEach(item => {
+        yearList.slice(0, -1).forEach(year => {
+          const calDesc = `${year}年${item.title}。更新时间：${nowTime}`
+          // prettier-ignore
+          const calText = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key]([year], calDesc)}END:VCALENDAR`
+          !existsSync(join(historyPath, item.key)) && mkdirSync(join(historyPath, item.key), { recursive: true })
+          writeFileSync(join(historyPath, item.key, `${year}.ics`), calText)
+        })
+        writeFileSync(join(historyPath, item.key, item.title), '')
+      })
+  })()
+
+  // 历史日历列表
+  ;(() => {
+    const historyCalendarReg = /<!-- \[calendar list start\] -->[\s\S]*<!-- \[calendar list end\] -->/
+    const calendarListText = `<!-- [calendar list start] -->\n${calendarList
+      .filter(i => i.key !== 'all')
+      .map(
+        item =>
+          `#### ${item.title}\n${yearList
+            .slice(0, -1)
+            .map(year => `* [${year}年](./${item.key}/${year}.ics)`)
+            .join('\n')}`
+      )
+      .join('\n')}\n<!-- [calendar list end] -->`
+    const data = readFileSync(join(historyPath, 'README.md'), 'utf-8').replace(historyCalendarReg, calendarListText)
+    writeFileSync(join(historyPath, 'README.md'), data)
+  })()
+
+  // 修改介绍文件的 更新时间
+  ;(() => {
+    const writePathList = [join(resolve('README.md')), join(calendarPath, 'README.md'), join(historyPath, 'README.md'), join(calendarPath, 'index.html')]
+    const nowTimeReg = /<!-- \[update time start\] -->(.|\n|\r)*<!-- \[update time end\] -->/
+    writePathList.forEach(path => {
+      const nowTimeText = `<!-- [update time start] -->更新时间：${nowTime}<!-- [update time end] -->`
+      const data = readFileSync(path, 'utf-8').replace(nowTimeReg, nowTimeText)
+      writeFileSync(path, data)
+    })
+  })()
   // auspiciousDay()
-  const writePathList = [join(resolve('README.md')), join(calendarPath, 'README.md'), join(calendarPath, 'index.html')]
-  writePathList.forEach(path => {
-    const data = readFileSync(path, 'utf-8').replace(nowTimeReg, nowTime)
-    writeFileSync(path, data)
-  })
 }
