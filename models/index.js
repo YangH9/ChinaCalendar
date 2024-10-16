@@ -151,7 +151,7 @@ const auspiciousDay = (yearList, calDesc, all) => {
  */
 const lunarBody = (yearList, calDesc, all) => {
   let keyId = 1
-  const { nowDate, uName, modified } = globalThis
+  const { uName, modified } = globalThis
   return yearList
     .map(year => {
       let item = dayjs().year(year).startOf('year')
