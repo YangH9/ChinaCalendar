@@ -104,47 +104,6 @@ const solarTermBody = (yearList, calDesc, all) => {
     .join('')
 }
 
-// 黄道吉日 auspiciousday
-// https://lunisolar.js.org/
-const auspiciousDay = (yearList, calDesc, all) => {
-  let keyId = 1
-  const { uName, modified } = globalThis
-  return [yearList[0]]
-    .map(i => {
-      let item = dayjs().year(i).startOf('year')
-      return Array.from({ length: 12 + item.isLeapYear() }, (_, index) => {
-        const time = item.add(index, 'day')
-        const { timeTS, timeTE, timeT } = calendarTimeCreate(time.format('YYYYMMDD'))
-        const lunarData = solarToLunar(time.year(), time.month() + 1, time.date())
-        const summary = `${lunarData.IMonthCn} ${lunarData.IDayCn} ${lunarData.lYear}年`
-        const location = `${lunarData.gzYear} ${lunarData.Animal}年 ${lunarData.gzMonth}月 ${lunarData.gzDay}日`
-        const description = `${lunarData.lYear}年 ${lunarData.IMonthCn} ${lunarData.IDayCn}`
-        const solarDate = time.format('日期：YYYY年MM月DD日')
-        const UID = `${timeT}_lunar_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-        // console.log(lunarData)
-        // 子日青龙，丑日明堂
-        // 寅日天刑，卯日朱雀
-        // 辰日金匮，巳日天德
-        // 午日白虎，未日玉堂
-        // 申日天牢，酉日玄武
-        // 戌日司命，亥日勾陈
-
-        // 青龙，天德，玉堂，司命，明堂，金匮      黄道吉日
-
-        // 农历 八月初七
-        // 甲辰 [龙] 年
-        // 癸酉月 丙子日
-        // 宜：沐浴 入殓 移柩 除服 成服 破土 平治道涂
-        // 忌：嫁娶 移徙 入宅 开市
-
-        // prettier-ignore
-        // return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nLOCATION:${location}\nDESCRIPTION:${description}\\n${location}\\n${solarDate}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-      })
-    })
-    .flat()
-    .join('')
-}
-
 /**
  * @description: 农历
  * @returns {String} 日历数据
@@ -226,7 +185,9 @@ const calendarOption = {
  * @returns {Object}
  */
 exports.calendarGenerate = () => {
-  const { uName, yearList, nowTime, calendarPath, historyPath, calendarList } = globalThis
+  const calendarPath = resolve('submodule-branch-pages')
+  const historyPath = resolve('submodule-store-calendar')
+  const { uName, yearList, nowTime, calendarList } = globalThis
   // 正常订阅日历，两年时间范围
   ;(() => {
     calendarList.forEach(item => {
@@ -280,5 +241,4 @@ exports.calendarGenerate = () => {
       writeFileSync(path, data)
     })
   })()
-  // auspiciousDay()
 }

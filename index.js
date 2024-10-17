@@ -9,8 +9,6 @@ globalThis.nowTime = globalThis.nowDate.format('YYYY-MM-DD')
 globalThis.modified = globalThis.nowDate.format('YYYYMMDDTHHmmss')
 globalThis.yearList = []
 globalThis.dataPath = resolve('data')
-globalThis.calendarPath = resolve('submodule-branch-pages')
-globalThis.historyPath = resolve('submodule-store-calendar')
 
 // 读取生成部分数据
 let min = 0
