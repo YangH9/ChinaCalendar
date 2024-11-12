@@ -16,15 +16,12 @@ https://www.gov.cn/zhengce/content/202411/content_6986382.htm
 
  */
 
-
 exports.govUrl = 'https://www.gov.cn/zhengce/content/202411/content_6986382.htm'
 exports.list = [
   {
     summary: '元旦',
     description: '一、元旦：1月1日（周三）放假1天，不调休。',
-    timeList: [
-      { time: '2025/01/01', name: '假期', type: 'holiday' },
-    ]
+    timeList: [{ time: '2025/01/01', name: '假期', type: 'holiday' }]
   },
   {
     summary: '春节',
@@ -48,7 +45,7 @@ exports.list = [
     timeList: [
       { time: '2025/04/04', name: '假期', type: 'holiday' },
       { time: '2025/04/05', name: '假期', type: 'holiday' },
-      { time: '2025/04/06', name: '假期', type: 'holiday' },
+      { time: '2025/04/06', name: '假期', type: 'holiday' }
     ]
   },
   {
@@ -60,7 +57,7 @@ exports.list = [
       { time: '2025/05/02', name: '假期', type: 'holiday' },
       { time: '2025/05/03', name: '假期', type: 'holiday' },
       { time: '2025/05/04', name: '假期', type: 'holiday' },
-      { time: '2025/05/05', name: '假期', type: 'holiday' },
+      { time: '2025/05/05', name: '假期', type: 'holiday' }
     ]
   },
   {
