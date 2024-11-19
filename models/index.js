@@ -64,6 +64,62 @@ const holidayBody = (yearList, calDesc, all) => {
 }
 
 /**
+ * @description: 法定节假日（时间段版本，节假日连续天数使用一个时间段
+ * @returns {String} 日历数据
+ */
+const holiday_1_Body = (yearList, calDesc, all) => {
+  let keyId = 1
+  const { dataPath, uName, modified } = globalThis
+  return yearList
+    .map(year => {
+      const { list, govUrl } = require(join(dataPath, `${year}.js`))
+      return list
+        .map(item => {
+          let hnum = 0
+          let cnum = 0
+          const { hsum, csum, newList } = item.timeList.reduce(
+            (total, item) => {
+              const obj = {
+                hsum: total.hsum + (item.type === 'holiday'),
+                csum: total.csum + (item.type === 'compensateday'),
+                newList: total.newList
+              }
+              if (obj.newList.at(-1)?.type === item.type) {
+                let time = new Date(item.time) - new Date(obj.newList.at(-1).endTime)
+                if (time === 24 * 60 * 60 * 1000) {
+                  obj.newList.at(-1).endTime = item.time
+                }
+              } else {
+                obj.newList.push({ ...item, endTime: item.time })
+              }
+              return obj
+            },
+            { hsum: 0, csum: 0, newList: [] }
+          )
+          return newList
+            .map(i => {
+              const { timeTS, timeTE, timeT, time09, time18 } = calendarTimeCreate(i.time)
+              const { timeTS:timeTS_E, timeTE:timeTE_E, timeT:timeT_E, time09:time09_E, time18:time18_E } = calendarTimeCreate(i.endTime)
+              const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+              if (i.type === 'holiday') {
+                hnum++
+                // 法定休假日
+                // prettier-ignore
+                return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE_E}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:「${item.summary} ${i.name}」 ${time09 === time09_E ? `第${hnum}天/` : ''}共${hsum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+              }
+              cnum++
+              // 法定补班日
+              // prettier-ignore
+              return `BEGIN:VEVENT\nDTSTART:${time09}\nDTEND:${time18_E}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:「${item.summary} ${i.name}」 ${time09 === time09_E ? `第${cnum}天/` : ''}共${csum}天\nDESCRIPTION:${item.description}\\n\\n放假通知：${govUrl}\\n\\n${calDesc}\nSTATUS:TENTATIVE\nTRANSP:OPAQUE\nSEQUENCE:1\nBEGIN:VALARM\nTRIGGER:-PT60M\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\n`
+            })
+            .join('')
+        })
+        .join('')
+    })
+    .join('')
+}
+
+/**
  * @description: 节日
  * @returns {String} 日历数据
  */
@@ -170,9 +226,19 @@ const allBody = (year, calDesc) => {
   return `${holidayBody(year, calDesc, true)}${festivalBody(year, calDesc, true)}${solarTermBody(year, calDesc, true)}`
 }
 
+/**
+ * @description: 全部日历汇总(时间段版本)
+ * @returns {String} 日历数据
+ */
+const all_1Body = (year, calDesc) => {
+  return `${holiday_1_Body(year, calDesc, true)}${festivalBody(year, calDesc, true)}${solarTermBody(year, calDesc, true)}`
+}
+
 const calendarOption = {
   all: allBody,
   holiday: holidayBody,
+  all_1: all_1Body,
+  holiday_1: holiday_1_Body,
   festival: festivalBody,
   solarTerm: solarTermBody,
   lunar: lunarBody,

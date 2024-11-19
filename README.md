@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> <!-- [update time start] -->更新时间：2024-11-12<!-- [update time end] -->
+> <!-- [update time start] -->更新时间：2024-11-19<!-- [update time end] -->
 
 [使用方式](#订阅方式)
 
@@ -17,15 +17,17 @@
 
 ### 完整版
 
-> 包含所有类型日历（暂时除农历、天干地支），一次全部订阅，体积较大
+> 包含所有类型日历（暂时除农历、天干地支），一次全部订阅，体积较大。(时间段版本为多日数据连贯显示)
 
 - 订阅链接：[https://yangh9.github.io/ChinaCalendar/calendar.ics](https://yangh9.github.io/ChinaCalendar/calendar.ics)
+- 订阅链接(时间段版本)：[https://yangh9.github.io/ChinaCalendar/calendar_1.ics](https://yangh9.github.io/ChinaCalendar/calendar_1.ics)
 
 ### 法定节假日
 
-> 打工人放假日历，国务院发布的放假补班通知，含休假补班日
+> 打工人放假日历，国务院发布的放假补班通知，含休假补班日。(时间段版本为多日数据连贯显示)
 
 - 订阅链接：[https://yangh9.github.io/ChinaCalendar/cal_holiday.ics](https://yangh9.github.io/ChinaCalendar/cal_holiday.ics)
+- 订阅链接(时间段版本)：[https://yangh9.github.io/ChinaCalendar/cal_holiday_1.ics](https://yangh9.github.io/ChinaCalendar/cal_holiday_1.ics)
 
 ### 节日纪念日
 

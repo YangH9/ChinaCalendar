@@ -24,7 +24,9 @@ readdirSync(globalThis.dataPath).forEach(fileName => {
 
 globalThis.calendarList = [
   { title: '中华人民共和国节日、纪念日、法定节假日调休补班、二十四节气、农历天干地支日历', key: 'all', file: 'calendar.ics' },
+  { title: '中华人民共和国节日、纪念日、法定节假日调休补班、二十四节气、农历天干地支日历(时间段版本)', key: 'all_1', file: 'calendar_1.ics' },
   { title: '中华人民共和国法定节假日调休补班日历', key: 'holiday', file: 'cal_holiday.ics' },
+  { title: '中华人民共和国法定节假日调休补班日历(时间段版本)', key: 'holiday_1', file: 'cal_holiday_1.ics' },
   { title: '中华人民共和国节日纪念日日历', key: 'festival', file: 'cal_festival.ics' },
   { title: '中华人民共和国二十四节气日历', key: 'solarTerm', file: 'cal_solarTerm.ics' },
   { title: '中华人民共和国农历、天干地支日历', key: 'lunar', file: 'cal_lunar.ics' },
