@@ -99,7 +99,7 @@ const holiday_1_Body = (yearList, calDesc, all) => {
           return newList
             .map(i => {
               const { timeTS, timeTE, timeT, time09, time18 } = calendarTimeCreate(i.time)
-              const { timeTS:timeTS_E, timeTE:timeTE_E, timeT:timeT_E, time09:time09_E, time18:time18_E } = calendarTimeCreate(i.endTime)
+              const { timeTS: timeTS_E, timeTE: timeTE_E, timeT: timeT_E, time09: time09_E, time18: time18_E } = calendarTimeCreate(i.endTime)
               const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
               if (i.type === 'holiday') {
                 hnum++
@@ -129,13 +129,26 @@ const festivalBody = (yearList, calDesc, all) => {
   const { list } = require(join(dataPath, 'ChineseFestival.js'))
   return yearList
     .map(year => {
-      return list(year)
-        .map(i => {
-          const { timeTS, timeTE, timeT } = calendarTimeCreate(i.time)
-          const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-          return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${i.summary}』\nDESCRIPTION:${i.description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-        })
-        .join('')
+      // 冬至日，数九天
+      const dongzhi = dayjs(`${year - 1}/${12}/${getSolarTerm(year - 1, 24)}`)
+      const dongjiu = ['冬二九', '冬三九', '冬四九', '冬五九', '冬六九', '冬七九', '冬八九', '冬九九']
+      return (
+        list(year)
+          .map(i => {
+            const { timeTS, timeTE, timeT } = calendarTimeCreate(i.time)
+            const UID = `${timeT}_${i.type}_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+            return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${i.summary}』\nDESCRIPTION:${i.description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+          })
+          .join('') +
+        Array.from({ length: 8 }, (_, i) => {
+          const itemDate = dongzhi.add((i + 1) * 9, 'day')
+          const { timeTS, timeTE, timeT } = calendarTimeCreate(itemDate)
+          const summary = dongjiu[i]
+          const description = `${summary}，数九天，${itemDate.format('YYYY年MM月DD日')}`
+          const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+          return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nDESCRIPTION:${description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+        }).join('')
+      )
     })
     .join('')
 }
@@ -266,25 +279,22 @@ exports.calendarGenerate = () => {
 
   // 历史年份日历
   ;(() => {
-    calendarList
-      .filter(i => i.key !== 'all')
-      .forEach(item => {
-        yearList.slice(0, -1).forEach(year => {
-          const calDesc = `${year}年${item.title}。更新时间：${nowTime}`
-          // prettier-ignore
-          const calText = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key]([year], calDesc)}END:VCALENDAR`
-          !existsSync(join(historyPath, item.key)) && mkdirSync(join(historyPath, item.key), { recursive: true })
-          writeFileSync(join(historyPath, item.key, `${year}.ics`), calText)
-        })
-        writeFileSync(join(historyPath, item.key, item.title), '')
+    calendarList.forEach(item => {
+      yearList.slice(0, -1).forEach(year => {
+        const calDesc = `${year}年${item.title}。更新时间：${nowTime}`
+        // prettier-ignore
+        const calText = `BEGIN:VCALENDAR\nPRODID:-//${uName}//China Calendar//CN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-WR-CALNAME:${item.title}\nX-WR-TIMEZONE:Asia/Shanghai\nX-WR-CALDESC:${calDesc}\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nDTSTART:19700101T000000\nEND:STANDARD\nEND:VTIMEZONE\n${calendarOption[item.key]([year], calDesc)}END:VCALENDAR`
+        !existsSync(join(historyPath, item.key)) && mkdirSync(join(historyPath, item.key), { recursive: true })
+        writeFileSync(join(historyPath, item.key, `${year}.ics`), calText)
       })
+      writeFileSync(join(historyPath, item.key, item.title), '')
+    })
   })()
 
   // 历史日历列表
   ;(() => {
     const historyCalendarReg = /<!-- \[calendar list start\] -->[\s\S]*<!-- \[calendar list end\] -->/
     const calendarListText = `<!-- [calendar list start] -->\n${calendarList
-      .filter(i => i.key !== 'all')
       .map(
         item =>
           `#### ${item.title}\n${yearList
