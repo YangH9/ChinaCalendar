@@ -131,7 +131,13 @@ const festivalBody = (yearList, calDesc, all) => {
     .map(year => {
       // 冬至日，数九天
       const dongzhi = dayjs(`${year - 1}/${12}/${getSolarTerm(year - 1, 24)}`)
-      const dongjiu = ['冬二九', '冬三九', '冬四九', '冬五九', '冬六九', '冬七九', '冬八九', '冬九九']
+      const shujiu = ['冬一九', '冬二九', '冬三九', '冬四九', '冬五九', '冬六九', '冬七九', '冬八九', '冬九九']
+      // 三伏天，夏至、立秋
+      const gan = ['', '辛', '壬', '癸', '甲', '乙', '丙', '丁', '戊', '己', '庚']
+      const xiazhi = dayjs(`${year}/${6}/${getSolarTerm(year, 12)}`)
+      const liqiu = dayjs(`${year}/${8}/${getSolarTerm(year, 15)}`)
+      const xiazhiGz = 10 - gan.indexOf(solarToLunar(xiazhi.year(), xiazhi.month() + 1, xiazhi.date()).gzDay[0])
+      const liqiuGz = 10 - gan.indexOf(solarToLunar(liqiu.year(), liqiu.month() + 1, liqiu.date()).gzDay[0])
       return (
         list(year)
           .map(i => {
@@ -140,14 +146,59 @@ const festivalBody = (yearList, calDesc, all) => {
             return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${i.summary}』\nDESCRIPTION:${i.description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
           })
           .join('') +
-        Array.from({ length: 8 }, (_, i) => {
-          const itemDate = dongzhi.add((i + 1) * 9, 'day')
-          const { timeTS, timeTE, timeT } = calendarTimeCreate(itemDate)
-          const summary = dongjiu[i]
-          const description = `${summary}，数九天，${itemDate.format('YYYY年MM月DD日')}`
+        Array.from({ length: 9 }, (_, i) => {
+          const startDate = dongzhi.add(i * 9, 'day')
+          const endDate = dongzhi.add(i * 9 + 8, 'day')
+          const { timeTS, timeT } = calendarTimeCreate(startDate)
+          const { timeTE: timeTE_E } = calendarTimeCreate(endDate)
+          const summary = `『${shujiu[i]}』${startDate.format('M月D')}~${endDate.format('M月D')}`
+          const description = `${shujiu[i]}，数九天，${startDate.format('YYYY年MM月DD日')}~${endDate.format('YYYY年MM月DD日')}。\\n`
           const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
-          return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:『${summary}』\nDESCRIPTION:${description}\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
-        }).join('')
+          // prettier-ignore
+          return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE_E}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:${summary}\nDESCRIPTION:${description}“数九”的正确算法是从冬至后第一个壬日算起，故，“九”在每个年份中具体日期是不固定的，须视冬至后第一个壬日在哪一天而定。另有认为“数九”是从冬至这天算起的，从冬至这天算起那么每年“九”的具体时间是固定的，每个“九”都固定在冬至后第9天、第18天、第27天…。“数九”从冬至这天算起的算法是不太准确的。\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+        }).join('') +
+        (() => {
+          // 三伏天
+          // 夏至后第三个庚日为初伏，第四个庚日为中伏，立秋后的第一个庚日为末伏。
+          return (
+            (() => {
+              // 初伏
+              const startDate = xiazhi.add(xiazhiGz + 20, 'day')
+              const endDate = xiazhi.add(xiazhiGz + 30 - 1, 'day')
+              const { timeTS, timeT } = calendarTimeCreate(startDate)
+              const { timeTE: timeTE_E } = calendarTimeCreate(endDate)
+              const summary = `『初伏』${startDate.format('M月D')}~${endDate.format('M月D')}`
+              const description = `初伏，${startDate.format('YYYY年MM月DD日')}~${endDate.format('YYYY年MM月DD日')}。\\n`
+              const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+              // prettier-ignore
+              return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE_E}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:${summary}\nDESCRIPTION:${description}初伏，是“三伏”之第一伏。其日期从夏至后的第三个庚日起，至夏至后第四个庚前一天这段时间。因为每个庚日之间相隔10天，所以初伏时间是10天。\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+            })() +
+            (() => {
+              // 中伏
+              const startDate = xiazhi.add(xiazhiGz + 30, 'day')
+              const endDate = liqiu.add(liqiuGz - 1, 'day')
+              const { timeTS, timeT } = calendarTimeCreate(startDate)
+              const { timeTE: timeTE_E } = calendarTimeCreate(endDate)
+              const summary = `『中伏』${startDate.format('M月D')}~${endDate.format('M月D')}`
+              const description = `中伏，${startDate.format('YYYY年MM月DD日')}~${endDate.format('YYYY年MM月DD日')}。\\n`
+              const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+              // prettier-ignore
+              return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE_E}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:${summary}\nDESCRIPTION:${description}中伏，“三伏”之第二伏，即夏至后的第四个庚日起始，至立秋后第一个庚日这段时间。中伏的天数有长有短，可能是10天，也可能是20天，这取决于每年夏至节气后第3个庚日（初伏）出现日期的迟早。\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+            })() +
+            (() => {
+              // 末伏
+              const startDate = liqiu.add(liqiuGz, 'day')
+              const endDate = liqiu.add(liqiuGz + 10 - 1, 'day')
+              const { timeTS, timeT } = calendarTimeCreate(startDate)
+              const { timeTE: timeTE_E } = calendarTimeCreate(endDate)
+              const summary = `『末伏』${startDate.format('M月D')}~${endDate.format('M月D')}`
+              const description = `末伏${startDate.format('YYYY年MM月DD日')}~${endDate.format('YYYY年MM月DD日')}。\\n`
+              const UID = `${timeT}_solarTerm_${all ? `all_${AllKeyId++}` : keyId++}@${uName}`
+              // prettier-ignore
+              return `BEGIN:VEVENT\nDTSTART;${timeTS}\nDTEND;${timeTE_E}\nUID:${UID}\nCREATED:${timeT}\nLAST-MODIFIED:${modified}\nSUMMARY:${summary}\nDESCRIPTION:${description}末伏，“三伏”之第三伏，是指立秋后第一个庚日至立秋后第二个庚日前一天这时段，共10天。末伏是三伏天中的最后一伏，俗称秋老虎。末伏早晚较凉快，白天阳光依然剧烈。\\n\\n${calDesc}\nSTATUS:CONFIRMED\nTRANSP:TRANSPARENT\nSEQUENCE:1\nEND:VEVENT\n`
+            })()
+          )
+        })()
       )
     })
     .join('')
