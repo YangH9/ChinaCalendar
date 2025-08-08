@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> <!-- [update time start] -->更新时间：2025-08-07<!-- [update time end] -->
+> <!-- [update time start] -->更新时间：2025-08-09<!-- [update time end] -->
 
 [使用方式](#订阅方式)
 
