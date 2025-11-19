@@ -5,7 +5,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:中华人民共和国法定节假日调休补班日历(时间段版本)
 X-WR-TIMEZONE:Asia/Shanghai
-X-WR-CALDESC:更新时间：2025-11-04
+X-WR-CALDESC:更新时间：2025-11-19
 BEGIN:VTIMEZONE
 TZID:Asia/Shanghai
 X-LIC-LOCATION:Asia/Shanghai
@@ -21,9 +21,9 @@ DTSTART;VALUE=DATE:20250101
 DTEND;VALUE=DATE:20250102
 UID:20250101T000001_holiday_1@YangH9
 CREATED:20250101T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「元旦 假期」 第1天/共1天
-DESCRIPTION:一、元旦：1月1日（周三）放假1天，不调休。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:一、元旦：1月1日（周三）放假1天，不调休。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -33,9 +33,9 @@ DTSTART:20250126T090000
 DTEND:20250126T180000
 UID:20250126T000001_compensateday_2@YangH9
 CREATED:20250126T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「春节 补班」 第1天/共2天
-DESCRIPTION:二、春节：1月28日（农历除夕、周二）至2月4日（农历正月初七、周二）放假调休，共8天。1月26日（周日）、2月8日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:二、春节：1月28日（农历除夕、周二）至2月4日（农历正月初七、周二）放假调休，共8天。1月26日（周日）、2月8日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -49,9 +49,9 @@ DTSTART;VALUE=DATE:20250128
 DTEND;VALUE=DATE:20250205
 UID:20250128T000001_holiday_3@YangH9
 CREATED:20250128T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「春节 假期」 共8天
-DESCRIPTION:二、春节：1月28日（农历除夕、周二）至2月4日（农历正月初七、周二）放假调休，共8天。1月26日（周日）、2月8日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:二、春节：1月28日（农历除夕、周二）至2月4日（农历正月初七、周二）放假调休，共8天。1月26日（周日）、2月8日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -61,9 +61,9 @@ DTSTART:20250208T090000
 DTEND:20250208T180000
 UID:20250208T000001_compensateday_4@YangH9
 CREATED:20250208T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「春节 补班」 第2天/共2天
-DESCRIPTION:二、春节：1月28日（农历除夕、周二）至2月4日（农历正月初七、周二）放假调休，共8天。1月26日（周日）、2月8日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:二、春节：1月28日（农历除夕、周二）至2月4日（农历正月初七、周二）放假调休，共8天。1月26日（周日）、2月8日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -77,9 +77,9 @@ DTSTART;VALUE=DATE:20250404
 DTEND;VALUE=DATE:20250407
 UID:20250404T000001_holiday_5@YangH9
 CREATED:20250404T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「清明节 假期」 共3天
-DESCRIPTION:三、清明节：4月4日（周五）至6日（周日）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:三、清明节：4月4日（周五）至6日（周日）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -89,9 +89,9 @@ DTSTART:20250427T090000
 DTEND:20250427T180000
 UID:20250427T000001_compensateday_6@YangH9
 CREATED:20250427T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「劳动节 补班」 第1天/共1天
-DESCRIPTION:四、劳动节：5月1日（周四）至5日（周一）放假调休，共5天。4月27日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:四、劳动节：5月1日（周四）至5日（周一）放假调休，共5天。4月27日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -105,9 +105,9 @@ DTSTART;VALUE=DATE:20250501
 DTEND;VALUE=DATE:20250506
 UID:20250501T000001_holiday_7@YangH9
 CREATED:20250501T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「劳动节 假期」 共5天
-DESCRIPTION:四、劳动节：5月1日（周四）至5日（周一）放假调休，共5天。4月27日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:四、劳动节：5月1日（周四）至5日（周一）放假调休，共5天。4月27日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -117,9 +117,9 @@ DTSTART;VALUE=DATE:20250531
 DTEND;VALUE=DATE:20250603
 UID:20250531T000001_holiday_8@YangH9
 CREATED:20250531T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「端午节 假期」 共3天
-DESCRIPTION:五、端午节：5月31日（周六）至6月2日（周一）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:五、端午节：5月31日（周六）至6月2日（周一）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -129,9 +129,9 @@ DTSTART:20250928T090000
 DTEND:20250928T180000
 UID:20250928T000001_compensateday_9@YangH9
 CREATED:20250928T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「国庆节、中秋节 补班」 第1天/共2天
-DESCRIPTION:六、国庆节、中秋节：10月1日（周三）至8日（周三）放假调休，共8天。9月28日（周日）、10月11日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:六、国庆节、中秋节：10月1日（周三）至8日（周三）放假调休，共8天。9月28日（周日）、10月11日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -145,9 +145,9 @@ DTSTART;VALUE=DATE:20251001
 DTEND;VALUE=DATE:20251009
 UID:20251001T000001_holiday_10@YangH9
 CREATED:20251001T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「国庆节、中秋节 假期」 共8天
-DESCRIPTION:六、国庆节、中秋节：10月1日（周三）至8日（周三）放假调休，共8天。9月28日（周日）、10月11日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:六、国庆节、中秋节：10月1日（周三）至8日（周三）放假调休，共8天。9月28日（周日）、10月11日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -157,9 +157,9 @@ DTSTART:20251011T090000
 DTEND:20251011T180000
 UID:20251011T000001_compensateday_11@YangH9
 CREATED:20251011T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「国庆节、中秋节 补班」 第2天/共2天
-DESCRIPTION:六、国庆节、中秋节：10月1日（周三）至8日（周三）放假调休，共8天。9月28日（周日）、10月11日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-04
+DESCRIPTION:六、国庆节、中秋节：10月1日（周三）至8日（周三）放假调休，共8天。9月28日（周日）、10月11日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202411/content_6986382.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -173,9 +173,9 @@ DTSTART;VALUE=DATE:20260101
 DTEND;VALUE=DATE:20260104
 UID:20260101T000001_holiday_12@YangH9
 CREATED:20260101T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「元旦 假期」 共3天
-DESCRIPTION:一、元旦：1月1日（周四）至3日（周六）放假调休，共3天。1月4日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:一、元旦：1月1日（周四）至3日（周六）放假调休，共3天。1月4日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -185,9 +185,9 @@ DTSTART:20260104T090000
 DTEND:20260104T180000
 UID:20260104T000001_compensateday_13@YangH9
 CREATED:20260104T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「元旦 补班」 第1天/共1天
-DESCRIPTION:一、元旦：1月1日（周四）至3日（周六）放假调休，共3天。1月4日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:一、元旦：1月1日（周四）至3日（周六）放假调休，共3天。1月4日（周日）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -201,9 +201,9 @@ DTSTART:20260214T090000
 DTEND:20260214T180000
 UID:20260214T000001_compensateday_14@YangH9
 CREATED:20260214T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「春节 补班」 第1天/共2天
-DESCRIPTION:二、春节：2月15日（农历腊月二十八、周日）至23日（农历正月初七、周一）放假调休，共9天。2月14日（周六）、2月28日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:二、春节：2月15日（农历腊月二十八、周日）至23日（农历正月初七、周一）放假调休，共9天。2月14日（周六）、2月28日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -217,9 +217,9 @@ DTSTART;VALUE=DATE:20260215
 DTEND;VALUE=DATE:20260224
 UID:20260215T000001_holiday_15@YangH9
 CREATED:20260215T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「春节 假期」 共9天
-DESCRIPTION:二、春节：2月15日（农历腊月二十八、周日）至23日（农历正月初七、周一）放假调休，共9天。2月14日（周六）、2月28日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:二、春节：2月15日（农历腊月二十八、周日）至23日（农历正月初七、周一）放假调休，共9天。2月14日（周六）、2月28日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -229,9 +229,9 @@ DTSTART:20260228T090000
 DTEND:20260228T180000
 UID:20260228T000001_compensateday_16@YangH9
 CREATED:20260228T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「春节 补班」 第2天/共2天
-DESCRIPTION:二、春节：2月15日（农历腊月二十八、周日）至23日（农历正月初七、周一）放假调休，共9天。2月14日（周六）、2月28日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:二、春节：2月15日（农历腊月二十八、周日）至23日（农历正月初七、周一）放假调休，共9天。2月14日（周六）、2月28日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -245,9 +245,9 @@ DTSTART;VALUE=DATE:20260404
 DTEND;VALUE=DATE:20260407
 UID:20260404T000001_holiday_17@YangH9
 CREATED:20260404T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「清明节 假期」 共3天
-DESCRIPTION:三、清明节：4月4日（周六）至6日（周一）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:三、清明节：4月4日（周六）至6日（周一）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -257,9 +257,9 @@ DTSTART;VALUE=DATE:20260501
 DTEND;VALUE=DATE:20260506
 UID:20260501T000001_holiday_18@YangH9
 CREATED:20260501T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「劳动节 假期」 共5天
-DESCRIPTION:四、劳动节：5月1日（周五）至5日（周二）放假调休，共5天。5月9日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:四、劳动节：5月1日（周五）至5日（周二）放假调休，共5天。5月9日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -269,9 +269,9 @@ DTSTART:20260509T090000
 DTEND:20260509T180000
 UID:20260509T000001_compensateday_19@YangH9
 CREATED:20260509T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「劳动节 补班」 第1天/共1天
-DESCRIPTION:四、劳动节：5月1日（周五）至5日（周二）放假调休，共5天。5月9日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:四、劳动节：5月1日（周五）至5日（周二）放假调休，共5天。5月9日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -285,9 +285,9 @@ DTSTART;VALUE=DATE:20260619
 DTEND;VALUE=DATE:20260622
 UID:20260619T000001_holiday_20@YangH9
 CREATED:20260619T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「端午节 假期」 共3天
-DESCRIPTION:五、端午节：6月19日（周五）至21日（周日）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:五、端午节：6月19日（周五）至21日（周日）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -297,9 +297,9 @@ DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260928
 UID:20260925T000001_holiday_21@YangH9
 CREATED:20260925T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「中秋节 假期」 共3天
-DESCRIPTION:六、中秋节：9月25日（周五）至27日（周日）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:六、中秋节：9月25日（周五）至27日（周日）放假，共3天。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -309,9 +309,9 @@ DTSTART:20260920T090000
 DTEND:20260920T180000
 UID:20260920T000001_compensateday_22@YangH9
 CREATED:20260920T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「国庆节 补班」 第1天/共2天
-DESCRIPTION:七、国庆节：10月1日（周四）至7日（周三）放假调休，共7天。9月20日（周日）、10月10日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:七、国庆节：10月1日（周四）至7日（周三）放假调休，共7天。9月20日（周日）、10月10日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
@@ -325,9 +325,9 @@ DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261008
 UID:20261001T000001_holiday_23@YangH9
 CREATED:20261001T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「国庆节 假期」 共7天
-DESCRIPTION:七、国庆节：10月1日（周四）至7日（周三）放假调休，共7天。9月20日（周日）、10月10日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:七、国庆节：10月1日（周四）至7日（周三）放假调休，共7天。9月20日（周日）、10月10日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 SEQUENCE:1
@@ -337,9 +337,9 @@ DTSTART:20261010T090000
 DTEND:20261010T180000
 UID:20261010T000001_compensateday_24@YangH9
 CREATED:20261010T000001
-LAST-MODIFIED:20251104T180325
+LAST-MODIFIED:20251119T141009
 SUMMARY:「国庆节 补班」 第2天/共2天
-DESCRIPTION:七、国庆节：10月1日（周四）至7日（周三）放假调休，共7天。9月20日（周日）、10月10日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-04
+DESCRIPTION:七、国庆节：10月1日（周四）至7日（周三）放假调休，共7天。9月20日（周日）、10月10日（周六）上班。\n\n放假通知：https://www.gov.cn/zhengce/content/202611/content_7047090.htm\n\n更新时间：2025-11-19
 STATUS:TENTATIVE
 TRANSP:OPAQUE
 SEQUENCE:1
