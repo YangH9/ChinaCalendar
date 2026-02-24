@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> <!-- [update time start] -->更新时间：2025-12-09<!-- [update time end] -->
+> <!-- [update time start] -->更新时间：2026-02-24<!-- [update time end] -->
 
 [使用方式](#订阅方式)
 
@@ -79,6 +79,7 @@
 > 其他机型订阅方式持续补充中……
 
 > 注：本日历不会获取任何用户信息，不会向用户推送任何内容
+> 部分订阅文件较大，某些日历订阅软件可能会丢失部分数据，可以多试几次，让日历软件多运行一会。
 
 仓库地址：[https://github.com/YangH9/ChinaCalendar](https://github.com/YangH9/ChinaCalendar)
 
