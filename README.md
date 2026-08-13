@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/author-YangH9-blue)](https://github.com/YangH9)
 [![](https://img.shields.io/badge/github%20pages-white?logo=github&logoColor=black)](https://yangh9.github.io/ChinaCalendar)
 
-> <!-- [update time start] -->更新时间：2026-07-17<!-- [update time end] -->
+> <!-- [update time start] -->更新时间：2026-08-13<!-- [update time end] -->
 
 [使用方式](#订阅方式)
 
@@ -28,6 +28,13 @@
 
 - 订阅链接：[https://yangh9.github.io/ChinaCalendar/cal_holiday.ics](https://yangh9.github.io/ChinaCalendar/cal_holiday.ics)
 - 订阅链接(时间段版本)：[https://yangh9.github.io/ChinaCalendar/cal_holiday_1.ics](https://yangh9.github.io/ChinaCalendar/cal_holiday_1.ics)
+
+### 法定节假日倒计时纯享版
+
+> 法定节假日倒计时日历，可提前准备假期，暂时只加入了单条倒计时，后面可按需调整，还有春节纯享版。
+
+- 订阅链接：[https://yangh9.github.io/ChinaCalendar/countdown_holiday.ics](https://yangh9.github.io/ChinaCalendar/countdown_holiday.ics)
+- 春节纯享订阅链接：[https://yangh9.github.io/ChinaCalendar/countdown_ChineseNewYear.ics](https://yangh9.github.io/ChinaCalendar/countdown_ChineseNewYear.ics)
 
 ### 节日纪念日
 
