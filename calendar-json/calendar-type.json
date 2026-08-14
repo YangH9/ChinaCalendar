@@ -1,0 +1,55 @@
+{
+  "title": "日历日程类型列表",
+  "data": [
+    {
+      "name": "中华人民共和国节日、纪念日、法定节假日调休补班、二十四节气、农历天干地支日历",
+      "icsName": "calendar.ics",
+      "jsonName": "calendar.json"
+    },
+    {
+      "name": "中华人民共和国节日、纪念日、法定节假日调休补班、二十四节气、农历天干地支日历(时间段版本)",
+      "icsName": "calendar_1.ics",
+      "jsonName": "calendar_1.json"
+    },
+    {
+      "name": "中华人民共和国法定节假日调休补班日历",
+      "icsName": "cal_holiday.ics",
+      "jsonName": "cal_holiday.json"
+    },
+    {
+      "name": "中华人民共和国法定节假日调休补班日历(时间段版本)",
+      "icsName": "cal_holiday_1.ics",
+      "jsonName": "cal_holiday_1.json"
+    },
+    {
+      "name": "中华人民共和国法定节假日倒计时日历",
+      "icsName": "countdown_holiday.ics",
+      "jsonName": "countdown_holiday.json"
+    },
+    {
+      "name": "中华人民共和国春节倒计时日历",
+      "icsName": "countdown_ChineseNewYear.ics",
+      "jsonName": "countdown_ChineseNewYear.json"
+    },
+    {
+      "name": "中华人民共和国节日纪念日日历",
+      "icsName": "cal_festival.ics",
+      "jsonName": "cal_festival.json"
+    },
+    {
+      "name": "中华人民共和国二十四节气日历",
+      "icsName": "cal_solarTerm.ics",
+      "jsonName": "cal_solarTerm.json"
+    },
+    {
+      "name": "中华人民共和国农历、天干地支日历",
+      "icsName": "cal_lunar.ics",
+      "jsonName": "cal_lunar.json"
+    },
+    {
+      "name": "中华人民共和国天干地支、生辰八字日历",
+      "icsName": "cal_trunkBranch.ics",
+      "jsonName": "cal_trunkBranch.json"
+    }
+  ]
+}
