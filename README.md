@@ -17,7 +17,7 @@
 
 ### 完整版
 
-> 包含所有类型日历（暂时除农历、天干地支），一次全部订阅，体积较大。(时间段版本为多日数据连贯显示)
+> 包含所有类型日历（暂时除农历、天干地支、倒计时），一次全部订阅，体积较大。(时间段版本为多日数据连贯显示)
 
 - 订阅链接：[https://yangh9.github.io/ChinaCalendar/calendar.ics](https://yangh9.github.io/ChinaCalendar/calendar.ics)
 - 订阅链接(时间段版本)：[https://yangh9.github.io/ChinaCalendar/calendar_1.ics](https://yangh9.github.io/ChinaCalendar/calendar_1.ics)
@@ -29,7 +29,7 @@
 - 订阅链接：[https://yangh9.github.io/ChinaCalendar/cal_holiday.ics](https://yangh9.github.io/ChinaCalendar/cal_holiday.ics)
 - 订阅链接(时间段版本)：[https://yangh9.github.io/ChinaCalendar/cal_holiday_1.ics](https://yangh9.github.io/ChinaCalendar/cal_holiday_1.ics)
 
-### 法定节假日倒计时纯享版
+### 法定节假日倒计时
 
 > 法定节假日倒计时日历，可提前准备假期，暂时只加入了单条倒计时，后面可按需调整，还有春节纯享版。
 
